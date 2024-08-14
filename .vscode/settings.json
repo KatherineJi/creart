@@ -37,5 +37,6 @@
     "editor.defaultFormatter": "HookyQR.beautify"
   },
   "wxml.format.wrapLineLength": 120,
-  "wxml.format.wrapAttributes": "preserve"
+  "wxml.format.wrapAttributes": "preserve",
+  "wxml.format.preserveNewLines": false
 }

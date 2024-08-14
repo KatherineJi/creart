@@ -1,0 +1,16 @@
+<view class="template-list-wrap wr-class" id="{{independentID}}">
+	<block wx:for="{{templateList}}" wx:for-item="item" wx:key="index">
+		<template-card
+		  id="{{independentID}}-gd-{{index}}"
+		  data="{{item}}"
+		  currency="{{item.currency || '¥'}}"
+		  thresholds="{{thresholds}}"
+		  class="template-card-inside"
+		  data-index="{{index}}"
+		  bind:thumb="onClickTemplateThumb"
+		  bind:click="onClickTemplate"
+		  bind:add-cart="onAddCart"
+		/>
+	</block>
+</view>
+

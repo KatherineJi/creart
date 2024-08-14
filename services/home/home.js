@@ -24,9 +24,9 @@ function mockFetchHome() {
 
 /** 获取首页数据 */
 export function fetchHome() {
-  if (config.useMock) {
-    return mockFetchHome();
-  }
+  // if (config.useMock) {
+  return mockFetchHome();
+  // }
   return new Promise((resolve) => {
     resolve('real api');
   });

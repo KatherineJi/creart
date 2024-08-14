@@ -1,0 +1,39 @@
+<view
+  id="{{independentID}}"
+  class="template-card"
+  bind:tap="clickHandle"
+  data-template="{{ template }}"
+>
+	<view class="template-card__main">
+		<view class="template-card__thumb" bind:tap="clickThumbHandle">
+			<t-image
+			  wx:if="{{ !!template.preview_imgs }}"
+			  t-class="template-card__img"
+			  src="{{ template.preview_imgs[0] }}"
+			  mode="aspectFill"
+			  lazy-load
+			/>
+		</view>
+		<view class="template-card__body">
+			<view class="template-card__upper">
+				<view wx:if="{{ template.name }}" class="template-card__name">
+					{{ template.name }}
+				</view>
+			</view>
+			<view class="template-card__down">
+				<view wx:if="{{ template.tags && !!template.tags.length }}" class="template-card__tags">
+					<view
+					  wx:for="{{ template.tags }}"
+					  wx:key="index"
+					  wx:for-item="tag"
+					  class="template-card__tag"
+					  data-index="{{index}}"
+					>
+						{{tag}}
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+

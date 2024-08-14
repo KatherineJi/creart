@@ -36,7 +36,7 @@ Page({
   goodClickHandle(e) {
     const { index } = e.detail;
     const { spuId } = this.data.list[index];
-    wx.navigateTo({ url: `/pages/goods/details/index?spuId=${spuId}` });
+    wx.navigateTo({ url: `/pages/product/details/index?spuId=${spuId}` });
   },
 
   cardClickHandle() {

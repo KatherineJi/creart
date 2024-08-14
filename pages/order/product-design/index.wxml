@@ -1,0 +1,32 @@
+<view class="product-design-page">
+  <view class="design-content">
+    <view class="design-content-list">
+      <view class="design-add" bind:tap="toAdd">ADD</view>
+      <view class="design-image" wx:for="{{imageList}}" wx:key="index">
+        <t-image class="image-container" src="{{item.url}}" mode="aspectFill" />
+        <view>TODO 数量选择</view>
+      </view>
+    </view>
+  </view>
+  <view class="design-bottom">
+    <view class="design-warn" wx:if="{{warning}}">{{warning}}</view>
+    <view class="design-bar">
+      <t-button class="design-submit-button" bind:tap="submit">完成设计</t-button>
+    </view>
+
+    <!-- <buy-bar
+      spuId="{{spuId}}"
+      jumpArray="{{jumpArray}}"
+      soldout="{{soldout}}"
+      isStock="{{isStock}}"
+      shopCartNum="{{cartNum}}"
+      buttonType="{{buttonType}}"
+      bind:toAddCart="toAddCart"
+      bind:toNav="toNav"
+      bind:toBuyNow="buyItNow"
+      class="product-details-card"
+    /> -->
+  </view>
+</view>
+<t-toast id="t-toast" />
+<t-toast id="t-success-toast"/>

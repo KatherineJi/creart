@@ -1,11 +1,16 @@
 import { fetchHome } from '../../services/home/home';
 import { fetchGoodsList } from '../../services/good/fetchGoods';
+import { fetchProductList } from '../../services/product/fetchProductList';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 Page({
   data: {
     imgSrcs: [],
     tabList: [],
+    productList: [],
+    productListLoadStatus: 0,
+
+
     goodsList: [],
     goodsListLoadStatus: 0,
     pageLoading: false,
@@ -60,8 +65,43 @@ Page({
         imgSrcs: swiper,
         pageLoading: false,
       });
-      this.loadGoodsList(true);
+      console.log(1)
+      this.fetchProductList(true);
+
+      console.log(2)
     });
+  },
+
+  async fetchProductList(fresh = false) {
+    if (fresh) {
+      wx.pageScrollTo({
+        scrollTop: 0,
+      });
+    }
+
+    console.log(3)
+
+    this.setData({ productListLoadStatus: 1 });
+
+    // const pageSize = this.goodListPagination.num;
+    // let pageIndex = this.privateData.tabIndex * pageSize + this.goodListPagination.index + 1;
+    // if (fresh) {
+    //   pageIndex = 0;
+    // }
+
+    try {
+      const nextList = await fetchProductList();
+      this.setData({
+        productList: fresh ? nextList : this.data.productList.concat(nextList),
+        productListLoadStatus: 0,
+      });
+      console.log('productList', this.data.productList);
+
+      // this.goodListPagination.index = pageIndex;
+      // this.goodListPagination.num = pageSize;
+    } catch (err) {
+      this.setData({ productListLoadStatus: 3 });
+    }
   },
 
   tabChangeHandle(e) {
@@ -102,11 +142,12 @@ Page({
     }
   },
 
-  goodListClickHandle(e) {
-    const { index } = e.detail;
-    const { spuId } = this.data.goodsList[index];
+  productListClickHandle(e) {
+    console.log('e', e);
+    const { product } = e.detail;
+    const { spu_id } = product;
     wx.navigateTo({
-      url: `/pages/goods/details/index?spuId=${spuId}`,
+      url: `/pages/product/details/index?spuId=${spu_id}`,
     });
   },
 
@@ -119,7 +160,7 @@ Page({
   },
 
   navToSearchPage() {
-    wx.navigateTo({ url: '/pages/goods/search/index' });
+    wx.navigateTo({ url: '/pages/product/search/index' });
   },
 
   navToActivityDetail({ detail }) {

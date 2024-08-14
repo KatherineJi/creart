@@ -175,9 +175,8 @@ Page({
     Toast({
       context: this,
       selector: '#t-toast',
-      message: `${isSelected ? '选择' : '取消'}"${
-        currentGoods.title.length > 5 ? `${currentGoods.title.slice(0, 5)}...` : currentGoods.title
-      }"`,
+      message: `${isSelected ? '选择' : '取消'}"${currentGoods.title.length > 5 ? `${currentGoods.title.slice(0, 5)}...` : currentGoods.title
+        }"`,
       icon: '',
     });
     this.selectGoodsService({ spuId, skuId, isSelected }).then(() => this.refreshData());
@@ -222,7 +221,7 @@ Page({
             quantity: stockQuantity,
           }).then(() => this.refreshData());
         })
-        .catch(() => {});
+        .catch(() => { });
       return;
     }
     this.changeQuantityService({ spuId, skuId, quantity }).then(() => this.refreshData());
@@ -239,7 +238,7 @@ Page({
   goGoodsDetail(e) {
     const { spuId, storeId } = e.detail.goods;
     wx.navigateTo({
-      url: `/pages/goods/details/index?spuId=${spuId}&storeId=${storeId}`,
+      url: `/pages/product/details/index?spuId=${spuId}&storeId=${storeId}`,
     });
   },
 

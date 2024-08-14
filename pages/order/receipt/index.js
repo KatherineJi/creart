@@ -73,10 +73,10 @@ Page({
           ? 'name'
           : 'componentName'
         : item === 'code'
-        ? addressTagsIndex === 0
-          ? 'phone'
-          : 'code'
-        : 'email';
+          ? addressTagsIndex === 0
+            ? 'phone'
+            : 'code'
+          : 'email';
     this.setData({ [key]: value });
   },
   onSure() {

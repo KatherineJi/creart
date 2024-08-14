@@ -65,7 +65,7 @@ Page({
   goodClickHandle(e) {
     const { index } = e.detail;
     const { spuId } = this.data.goods[index];
-    wx.navigateTo({ url: `/pages/goods/details/index?spuId=${spuId}` });
+    wx.navigateTo({ url: `/pages/product/details/index?spuId=${spuId}` });
   },
 
   cartClickHandle() {

@@ -1,0 +1,26 @@
+<view class="product-category-page">
+  <view class="product-category-page-tabs">
+    <t-tabs
+      t-class="t-tabs"
+      t-class-active="tabs-external__active"
+      t-class-item="tabs-external__item"
+      value="{{currentTabValue}}"
+      space-evenly="{{false}}"
+      bind:change="tabChangeHandle">
+      <t-tab-panel
+        wx:for="{{tabList}}"
+        wx:for-index="index"
+        wx:key="index"
+        label="{{item.name}}"
+        value="{{item.id}}" />
+    </t-tabs>
+  </view>
+  <view>{{defaultTabValue}}</view>
+  <view class="product-category-page-container">
+    <product-list
+      wr-class="product-list-container"
+      productList="{{productList}}"
+      bind:click="productListClickHandle"
+      bind:addcart="productListAddCartHandle" />
+  </view>
+</view>

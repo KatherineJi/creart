@@ -64,13 +64,10 @@ Component({
 
     onChangeTrackingNo(service) {
       wx.navigateTo({
-        url: `/pages/order/fill-tracking-no/index?rightsNo=${
-          service.id
-        }&logisticsNo=${service.logisticsNo}&logisticsCompanyName=${
-          service.logisticsCompanyName
-        }&logisticsCompanyCode=${service.logisticsCompanyCode}&remark=${
-          service.remark || ''
-        }`,
+        url: `/pages/order/fill-tracking-no/index?rightsNo=${service.id
+          }&logisticsNo=${service.logisticsNo}&logisticsCompanyName=${service.logisticsCompanyName
+          }&logisticsCompanyCode=${service.logisticsCompanyCode}&remark=${service.remark || ''
+          }`,
       });
     },
 

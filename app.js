@@ -1,8 +1,9 @@
 import updateManager from './common/updateManager';
 
 App({
-  onLaunch: function () {},
+  onLaunch: function () { },
   onShow: function () {
     updateManager();
   },
+  globalData: {},
 });

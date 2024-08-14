@@ -262,7 +262,7 @@ Page({
           userAddressReq: { ...address, checked: true },
         });
       })
-      .catch(() => {});
+      .catch(() => { });
 
     const { userAddressReq } = this; // 收货地址
 

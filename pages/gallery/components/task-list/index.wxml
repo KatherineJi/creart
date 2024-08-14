@@ -1,0 +1,16 @@
+<view class="task-list-wrap wr-class" id="{{independentID}}">
+	<block wx:for="{{taskList}}" wx:for-item="item" wx:key="index">
+		<task-card
+		  id="{{independentID}}-gd-{{index}}"
+		  data="{{item}}"
+		  currency="{{item.currency || '¥'}}"
+		  thresholds="{{thresholds}}"
+		  class="task-card-inside"
+		  data-index="{{index}}"
+		  bind:thumb="onClickTaskThumb"
+		  bind:click="onClickTask"
+		  bind:add-cart="onAddCart"
+		/>
+	</block>
+</view>
+

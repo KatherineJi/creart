@@ -108,7 +108,7 @@ Page({
   async init() {
     try {
       await this.refresh();
-    } catch (e) {}
+    } catch (e) { }
   },
 
   checkQuery() {
@@ -314,7 +314,7 @@ Page({
         'serviceFrom.amount.current': this.data.serviceFrom.amount.temp * 100,
       });
     };
-    this.inputDialog._onCancel = () => {};
+    this.inputDialog._onCancel = () => { };
   },
 
   // 对输入的值进行过滤

@@ -1,0 +1,30 @@
+<view
+  id="{{independentID}}"
+  class="product-card"
+  bind:tap="clickHandle"
+  data-product="{{ product }}"
+>
+	<view class="product-card__main">
+		<view class="product-card__thumb" bind:tap="clickThumbHandle">
+			<t-image
+			  t-class="product-card__img"
+			  src="{{ product.preview_imgs[0] }}"
+			  mode="aspectFill"
+			  lazy-load
+			/>
+		</view>
+		<view class="product-card__body">
+			<view class="product-card__upper">
+				<view wx:if="{{ product.name }}" class="product-card__title">
+					{{ product.name }}
+				</view>
+			</view>
+			<view class="product-card__down">
+        <view wx:if="{{ product.description }}" class="product-card__desc">
+					{{ product.description }}
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+

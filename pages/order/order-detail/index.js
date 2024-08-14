@@ -203,7 +203,7 @@ Page({
   onGoodsCardTap(e) {
     const { index } = e.currentTarget.dataset;
     const goods = this.data.order.orderItemVOs[index];
-    wx.navigateTo({ url: `/pages/goods/details/index?spuId=${goods.spuId}` });
+    wx.navigateTo({ url: `/pages/product/details/index?spuId=${goods.spuId}` });
   },
 
   onEditAddressTap() {
@@ -215,7 +215,7 @@ Page({
           '_order.receiverAddress': address.address,
         });
       })
-      .catch(() => {});
+      .catch(() => { });
 
     wx.navigateTo({
       url: `/pages/usercenter/address/list/index?selectMode=1`,

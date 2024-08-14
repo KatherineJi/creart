@@ -35,7 +35,7 @@ Page({
     if (logisticsNo) {
       wx.setNavigationBarTitle({
         title: '修改运单号',
-        fail() {},
+        fail() { },
       });
       this.isChange = true;
       this.setData({
@@ -184,7 +184,7 @@ Page({
         });
         this.setData({ trackingNo: res.result });
       },
-      fail: () => {},
+      fail: () => { },
     });
   },
 });

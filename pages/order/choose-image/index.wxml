@@ -1,0 +1,41 @@
+<view class="choose-image-page">
+  <view class="design-content">
+    <view class="design-content-container">
+      <view class="design-add" bind:tap="chooseSource" wx:if="{{!image}}">
+        <view>选择图片</view>
+      </view>
+      <view class="design-image" bind:tap="editImage" wx:else>
+        <!-- <t-image class="image-container" src="{{item.url}}" mode="aspectFill" /> -->
+        <image mode="aspectFit" src="{{image}}"></image>
+      </view>
+    </view>
+    <t-button bind:tap="chooseSource" wx:if="{{!!image}}">修改图片</t-button>
+  </view>
+  <view class="design-bottom">
+    <view class="design-warn" wx:if="{{warning}}">{{warning}}</view>
+    <view class="design-bar">
+      <t-button class="design-submit-button" bind:tap="submit">保存</t-button>
+    </view>
+
+    <!-- <buy-bar
+      spuId="{{spuId}}"
+      jumpArray="{{jumpArray}}"
+      soldout="{{soldout}}"
+      isStock="{{isStock}}"
+      shopCartNum="{{cartNum}}"
+      buttonType="{{buttonType}}"
+      bind:toAddCart="toAddCart"
+      bind:toNav="toNav"
+      bind:toBuyNow="buyItNow"
+      class="product-details-card"
+    /> -->
+  </view>
+</view>
+<t-toast id="t-toast" />
+<t-popup visible="{{chooseSourceVisible}}" bind:visible-change="onChooseSourceVisibleChange" placement="center">
+  <view class="choose-source-popup">
+    <t-button class="button" bind:tap="onChoosePhone">从相册选择</t-button>
+    <t-button class="button" bind:tap="onChooseGallery">从画廊选择</t-button>
+    <t-icon t-class="close-btn" name="close-circle" size="32" color="#fff" bind:tap="onChooseSourceClose" />
+  </view>
+</t-popup>

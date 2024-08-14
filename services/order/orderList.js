@@ -29,11 +29,11 @@ function mockFetchOrdersCount(params) {
 
 /** 获取订单列表统计 */
 export function fetchOrdersCount(params) {
-  if (config.useMock) {
-    return mockFetchOrdersCount(params);
-  }
+  // if (config.useMock) {
+  return mockFetchOrdersCount(params);
+  // }
 
-  return new Promise((resolve) => {
-    resolve('real api');
-  });
+  // return new Promise((resolve) => {
+  //   resolve('real api');
+  // });
 }

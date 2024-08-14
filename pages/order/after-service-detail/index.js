@@ -161,7 +161,7 @@ Page({
   onGoodsCardTap(e) {
     const { index } = e.currentTarget.dataset;
     const goods = this.data.serviceRaw.rightsItem[index];
-    wx.navigateTo({ url: `/pages/goods/details/index?skuId=${goods.skuId}` });
+    wx.navigateTo({ url: `/pages/product/details/index?skuId=${goods.skuId}` });
   },
 
   onServiceNoCopy() {

@@ -1,0 +1,54 @@
+@import '../../../style/global.wxss';
+page {
+  width: 100vw;
+}
+
+.product-design-page .design-content {
+  background: rgb(216, 215, 215);
+  height: 100vh;
+}
+
+.design-content-list {
+  display: flex;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 28rpx 24rpx;
+}
+
+.design-add, .design-image {
+  position: relative;
+  display: flex;
+  line-height: 1;
+  padding: 0;
+  background: transparent;
+  width: 342rpx;
+  height: 380rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+  flex-direction: column;
+}
+
+.design-image .image-container {
+  width: 100%;
+  padding: 5px;
+}
+
+.design-bottom {
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+  width: 100%;
+}
+
+.design-bottom .design-bar {
+  padding: 8px 24px;
+  height: 150rpx;
+}
+
+.design-submit-button {
+  width: 100%;
+}

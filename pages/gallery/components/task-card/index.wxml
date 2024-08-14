@@ -1,0 +1,33 @@
+<view
+  id="{{independentID}}"
+  class="task-card"
+  bind:tap="clickHandle"
+  data-task="{{ task }}">
+  <view class="task-card__main">
+    <view class="task-card__thumb" bind:tap="clickThumbHandle">
+      <!-- <t-image
+        t-class="task-card__img"
+        src="{{ task.creations_preview_img }}"
+        mode="aspectFill"
+        lazy-load /> -->
+      <image style="width: 100%; height: 100%; background-color: #eeeeee;" src="{{task.creations_preview_img}}"></image>
+    </view>
+    <view class="task-card__body">
+      <view class="task-card__upper">
+        <view wx:if="{{ task.params }}" class="task-card__tags">
+          <view
+            class="task-card__tag-positive">
+            {{task.params.positive}}
+          </view>
+          <view
+            class="task-card__tag-negative">
+            {{task.params.negative}}
+          </view>
+        </view>
+      </view>
+      <view class="task-card__down">
+        <view class="task-card__status"> 状态：{{ statusMap[task.status] }} </view>
+      </view>
+    </view>
+  </view>
+</view>

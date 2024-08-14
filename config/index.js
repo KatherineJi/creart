@@ -1,6 +1,8 @@
 export const config = {
   /** 是否使用mock代替api返回 */
-  useMock: true,
+  // useMock: true,
+  log: true,
+  host: '101.43.108.238:8000',
 };
 
 export const cdnBase =
