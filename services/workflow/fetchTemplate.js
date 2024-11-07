@@ -1,4 +1,5 @@
 import { config } from '../../config/index';
+import request from '../_utils/request';
 
 /** 获取模板列表 */
 function mockFetchTemplate(tid = 0) {
@@ -12,15 +13,18 @@ export function fetchTemplate(tid = 0) {
   if (config.useMock) {
     return mockFetchTemplate(tid);
   }
-  return new Promise((resolve) => {
-    wx.request({
-      url: `http://${config.host}/design/templates/${tid}`,
-      method: 'GET',
-      data: {},
-      success: (res) => {
-        config.log && console.log('fetchTemplate', res.data)
-        resolve(res.data);
-      }
-    })
+
+  return request({
+    url: `http://${config.host}/design/templates/${tid}`,
+    method: 'GET',
+    data: {},
+    success: (resolve, res) => {
+      config.log && console.log('fetchTemplate', res)
+      resolve(res);
+    },
+    fail: (reject, err) => {
+      config.log && console.log('fetchTemplate err', err)
+      reject(err);
+    }
   });
 }

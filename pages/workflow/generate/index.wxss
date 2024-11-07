@@ -1,7 +1,7 @@
 .generate-page-container,
 .generate-page-header {
   display: block;
-  background: #f6f6f6;
+  /* background: #f6f6f6; */
   min-height: 100vh;
 }
 
@@ -10,16 +10,116 @@
   margin-top: 16rpx;
 }
 
-.generate-page-container .form-item {
+.form-container .form-item {
   margin-bottom: 24rpx;
   box-sizing: border-box;
+}
+
+.form-container .form-item .t-textarea {
+  padding: 0;
+  margin: 32rpx 32rpx;
+  padding-bottom: 8rpx;
+  border-bottom: 1px solid black;
+}
+
+.form-container .form-item .form-item-select {
+  padding-bottom: 8rpx;
+  margin: 32rpx 32rpx;
+  border-bottom: 1px solid black;
+}
+
+.form-item-select .form-item-title {
+  font-size: var(--td-font-size-base, 28rpx);
+  line-height: 44rpx;
+  padding-bottom: var(--td-spacer, 16rpx);
+}
+
+.form-item-select .t-tag {
+  margin-right: 24rpx;
 }
 
 .form-item-image {
   background-color: #fff;
   padding: 32rpx;
+  padding-bottom: 0;
 }
 
-.form-item-image .label {
-  padding-bottom: var(--td-spacer, 16rpx);
+.form-item-image .form-item-image-upload .t-upload__close-btn {
+  display: none;
+}
+
+.form-item-image .image-button {
+  padding-top: 32rpx;
+  /* padding-bottom: 16rpx; */
+  /* var(--td-spacer, 16rpx); */
+  display: flex;
+}
+
+.form-item-image .t-button {
+  height: 90rpx;
+  border: 0;
+}
+
+.button-single {
+  width: 500rpx;
+}
+
+.button-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group .t-button {
+  width: 300rpx;
+}
+
+.workflow-generate-page .tips-bottom,
+.workflow-generate-page .tips-up {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  font-size: 24rpx;
+  line-height: 24rpx;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+  /* margin: 0 auto; */
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.form-item-image .image-reference {
+  margin-top: 64rpx;
+}
+
+.image-reference-title {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.image-reference-image {
+  display: block;
+  margin-top: 32rpx;
+}
+
+.workflow-generate-page .t-button--primary {
+  background-color: #b9b9b9;
+}
+
+.image-reference-image {
+  width: 686rpx;
+}
+
+.image-reference-image image {
+  width: 100%;
+}
+
+.form-item-bottom {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 64rpx;
+}
+
+.form-item-bottom .tips-bottom {
+  padding-bottom: 64rpx;
 }

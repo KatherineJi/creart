@@ -8,8 +8,7 @@
       t-class-input-container="t-search__input-container"
       placeholder="搜索产品"
       leftIcon=""
-      disabled
-    >
+      disabled>
       <t-icon slot="left-icon" prefix="wr" name="search" size="40rpx" color="#bbb" />
     </t-search>
   </view>
@@ -22,13 +21,13 @@
       interval="{{interval}}"
       navigation="{{navigation}}"
       imageProps="{{swiperImageProps}}"
+      height="{{'750rpx'}}"
       list="{{imgSrcs}}"
-      bind:click="navToActivityDetail"
-    />
+      bind:click="navToActivityDetail" />
   </view>
 </view>
 <view class="home-page-container">
-  <view class="home-page-tabs">
+  <!-- <view class="home-page-tabs">
     <t-tabs
       t-class="t-tabs"
       t-class-active="tabs-external__active"
@@ -45,14 +44,18 @@
         value="{{item.key}}"
       />
     </t-tabs>
-  </view>
+  </view> -->
+
+  <template-list
+    wr-class="template-list-container"
+    templateList="{{templateList}}"
+    bind:click="templateListClickHandle" />
 
   <product-list
     wr-class="product-list-container"
     productList="{{productList}}"
     bind:click="productListClickHandle"
-    bind:addcart="productListAddCartHandle"
-  />
+    bind:addcart="productListAddCartHandle" />
   <load-more list-is-empty="{{!productList.length}}" status="{{productListLoadStatus}}" bind:retry="onReTry" />
   <t-toast id="t-toast" />
 </view>

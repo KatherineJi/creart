@@ -1,0 +1,7 @@
+function defineRdiv(num, by) {
+  return +num % +by;
+}
+
+module.exports = {
+  rdiv: defineRdiv,
+};

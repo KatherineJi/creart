@@ -1,4 +1,5 @@
 import { config } from '../../config/index';
+import request from '../_utils/request';
 
 /** 获取商品列表 */
 function mockFetchProductList(pageIndex = 1, pageSize = 20) {
@@ -18,15 +19,17 @@ export function fetchProductList(pageIndex = 1, pageSize = 19) {
   if (config.useMock) {
     return mockFetchProductList(pageIndex, pageSize);
   }
-  return new Promise((resolve) => {
-    wx.request({
-      url: `http://${config.host}/products`,
-      method: 'GET',
-      data: {},
-      success: (res) => {
-        config.log && console.log('fetchProductList', res.data)
-        resolve(res.data);
-      }
-    })
+  return request({
+    url: `http://${config.host}/products`,
+    method: 'GET',
+    data: {},
+    success: (resolve, res) => {
+      config.log && console.log('fetchProductList', res)
+      resolve(res);
+    },
+    fail: (reject, err) => {
+      config.log && console.log('fetchProductList err', err)
+      reject(err);
+    }
   });
 }

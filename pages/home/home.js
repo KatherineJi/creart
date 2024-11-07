@@ -1,20 +1,24 @@
 import { fetchHome } from '../../services/home/home';
 import { fetchGoodsList } from '../../services/good/fetchGoods';
-import { fetchProductList } from '../../services/product/fetchProductList';
+// import { fetchProductList } from '../../services/product/fetchProductList';
+import { fetchTemplateList } from '../../services/workflow/fetchTemplateList';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 Page({
   data: {
     imgSrcs: [],
+    swiperList: [],
     tabList: [],
-    productList: [],
-    productListLoadStatus: 0,
+    templateList: [],
+    templateListLoadStatus: 0,
+    // productList: [],
+    // productListLoadStatus: 0,
 
 
     goodsList: [],
     goodsListLoadStatus: 0,
     pageLoading: false,
-    current: 1,
+    current: 0,
     autoplay: true,
     duration: '500',
     interval: 5000,
@@ -62,11 +66,13 @@ Page({
     fetchHome().then(({ swiper, tabList }) => {
       this.setData({
         tabList,
-        imgSrcs: swiper,
+        swiperList: swiper,
+        imgSrcs: swiper.map(item => item.img),
         pageLoading: false,
       });
       console.log(1)
-      this.fetchProductList(true);
+      // this.fetchProductList(true);
+      this.loadTemplateList(true);
 
       console.log(2)
     });
@@ -78,8 +84,6 @@ Page({
         scrollTop: 0,
       });
     }
-
-    console.log(3)
 
     this.setData({ productListLoadStatus: 1 });
 
@@ -102,6 +106,40 @@ Page({
     } catch (err) {
       this.setData({ productListLoadStatus: 3 });
     }
+  },
+
+  async loadTemplateList(fresh = false) {
+    if (fresh) {
+      wx.pageScrollTo({
+        scrollTop: 0,
+      });
+    }
+
+    this.setData({ templateListLoadStatus: 1 });
+
+    const pageSize = this.goodListPagination.num;
+    let pageIndex = this.privateData.tabIndex * pageSize + this.goodListPagination.index + 1;
+    if (fresh) {
+      pageIndex = 0;
+    }
+
+    try {
+      const nextList = await fetchTemplateList(pageIndex, pageSize);
+      this.setData({
+        templateList: fresh ? nextList : this.data.templateList.concat(nextList),
+        templateListLoadStatus: 0,
+      });
+
+    } catch (err) {
+      this.setData({ templateListLoadStatus: 3 });
+    }
+  },
+
+  templateListClickHandle(e) {
+    const tid = e.detail.template.id;
+    wx.navigateTo({
+      url: `/pages/workflow/generate/index?template_id=${tid}`,
+    });
   },
 
   tabChangeHandle(e) {
@@ -163,10 +201,14 @@ Page({
     wx.navigateTo({ url: '/pages/product/search/index' });
   },
 
-  navToActivityDetail({ detail }) {
-    const { index: promotionID = 0 } = detail || {};
-    wx.navigateTo({
-      url: `/pages/promotion-detail/index?promotion_id=${promotionID}`,
-    });
+  navToActivityDetail(e) {
+    const index = e.detail.index;
+    const imgItem = this.data.swiperList[index];
+
+    if (imgItem.type === 'template') {
+      wx.navigateTo({
+        url: `/pages/workflow/generate/index?template_id=${imgItem.id}`,
+      });
+    }
   },
 });

@@ -1,39 +1,21 @@
+<wxs src="/utils/str.wxs" module="toolStr" />
+<wxs src="/utils/num.wxs" module="toolNum" />
 <view class="workflow-generate-page">
   <view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
     <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
   </view>
-  <!-- <view class="styles-page-header">
-    <view class="search" bind:tap="navToSearchPage">
-      <t-search
-        t-class-input="t-search__input"
-        t-class-input-container="t-search__input-container"
-        placeholder="搜索风格"
-        leftIcon=""
-        disabled>
-        <t-icon slot="left-icon" prefix="wr" name="search" size="40rpx" color="#bbb" />
-      </t-search>
-    </view>
-  </view> -->
-  <view class="generate-page-container">
-    <view class="form-container">
+  <view class="generate-page-container" wx:else>
+    <!-- <view>{{generateStatus}}</view> -->
+    <view class="form-container" wx:if="{{generateStatus === 3}}">
       <view
         wx:for="{{ formData }}"
         wx:key="index"
         wx:for-item="formItem"
+        wx:for-index="formIndex"
         class="form-item">
-        <view wx:if="{{formItem.type === 'image'}}" class="form-item-image">
-          <view class="label">{{formItem.description}}</view>
-          <t-upload
-            mediaType="{{['image']}}"
-            max="{{1}}"
-            files="{{fileList}}"
-            bind:add="handleAddImage"
-            bind:remove="handleRemoveImage">
-          </t-upload>
-        </view>
         <t-textarea
           wx:if="{{formItem.type === 'string'}}"
-          label="{{formItem.description}}"
+          label="{{formItem.description || formItem.name}}"
           placeholder="请输入文字"
           value="{{formValue[formItem.key]}}"
           disableDefaultPadding="{{true}}"
@@ -41,9 +23,63 @@
           mark:key="{{formItem.key}}"
           bind:line-change="onLineChange"
           bind:change="onTextChange" />
+        <view
+          class="form-item-select"
+          wx:if="{{formItem.type === 'select'}}">
+          <view class="form-item-title">{{formItem.description || formItem.name}}</view>
+          <view>
+            <t-tag class="option" wx:for="{{ formItem.keys }}" wx:key="optionItem" wx:for-item="optionItem"
+              mark:key="{{formItem.key}}" mark:value="{{optionItem}}"
+              variant="light"
+              theme="{{optionItem === formValue[formItem.key] ? themeList[toolNum.rdiv(formIndex, 4)] : 'default'}}"
+              shape="round"
+              bind:click="onOptionSelect">{{optionItem}}</t-tag>
+          </view>
+        </view>
       </view>
     </view>
-    <t-button theme="primary" size="large" bind:tap="handleFormSubmit">提交</t-button>
+    <view wx:if="{{formImage}}" class="form-item-image">
+      <t-upload
+        class="form-item-image-upload"
+        mediaType="{{['image']}}"
+        max="{{1}}"
+        gridConfig="{{gridConfig}}"
+        files="{{fileList}}"
+        disabled="{{generateStatus !== 0}}"
+        bind:add="handleAddImage"
+        bind:remove="handleRemoveImage">
+      </t-upload>
+      <view class="tips-up" wx:if="{{generateStatus === 2}}"><t-icon name="check-circle" size="32rpx" data-name="check-circle" bind:click="onIconTap" />上传成功！</view>
+      <view class="tips-up" wx:if="{{generateStatus === 99}}">未识别到人脸，请您按示例上传参考图</view>
+      <view class="image-button">
+        <t-button class="button-single" wx:if="{{generateStatus === 0}}" size="large" bind:tap="handleFileUpload">
+          上传人像参考图 </t-button>
+        <t-button class="button-single" wx:if="{{generateStatus === 1}}" size="large" loading disabled>上传中</t-button>
+        <view class="button-group" wx:if="{{generateStatus === 2}}">
+          <t-button size="large" bind:tap="handleNext">下一步</t-button>
+          <t-button variant="outline" size="large" bind:tap="handleFileReupload">重新上传</t-button>
+        </view>
+        <t-button wx:if="{{generateStatus === 99}}" size="large" bind:tap="handleFileReupload">重新上传 </t-button>
+      </view>
+      <view class="tips-bottom" wx:if="{{generateStatus === 0}}">请上传单人正面照，人物脸部不能被遮挡</view>
+      <view class="tips-bottom" wx:if="{{generateStatus === 1}}">正在识别您上传的参考图</view>
+      <view class="image-reference" wx:if="{{toolStr.indexOf([0, 1, 99], generateStatus) > -1}}">
+        <view class="image-reference-title">参考图上传示例：</view>
+        <t-image class="image-reference-image"
+          src="https://6372-creart-test-1g2yuv6d82b517bf-1257609973.tcb.qcloud.la/upload-reference.png?sign=024c7f5c8333f9e7429212f8ec03db74&t=1730892770"
+          mode="widthFix" width="100%" aria-label="参考图上传示例" />
+      </view>
+    </view>
+    <view class="form-item-bottom">
+      <view class="tips-bottom" wx:if="{{generateStatus === 4}}"><t-icon name="check-circle" size="32rpx" data-name="check-circle" bind:click="onIconTap" />已加入生成队列，请耐心等待2-3分钟\n去画廊可以查看队列中的图片</view>
+      <view class="button-group" wx:if="{{generateStatus === 4}}">
+        <t-button size="large" bind:tap="handleBack">继续生成</t-button>
+        <t-button size="large" variant="outline" bind:tap="handleJumpGallery">查看队列</t-button>
+      </view>
+      <t-button class="button-single" wx:if="{{generateStatus === 3}}" size="large" bind:tap="handleFormSubmit">确认生成</t-button>
+      <view class="tips-bottom" wx:if="{{generateStatus === 3}}">提交后需要2-3分钟的时间生成图片\n您可在画廊中查看已完成和生成中的图片</view>
+    </view>
     <t-toast id="t-success-toast" bind:close="handleSuccessToastClose" />
   </view>
+  <t-message id="t-message" />
 </view>

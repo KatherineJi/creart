@@ -1,14 +1,30 @@
 import { fetchTaskList } from '../../services/task/fetchTaskList';
 import Toast from 'tdesign-miniprogram/toast/index';
 
+const app = getApp();
+
 Page({
   data: {
+    galleryTab: 0,
     taskList: [],
     skuId: '',
     isChooseImage: false,
 
     imgSrcs: [],
-    tabList: [],
+    tabList: [
+      {
+        key: 0,
+        text: '全部'
+      },
+      {
+        key: 1,
+        text: '生成中'
+      },
+      {
+        key: 2,
+        text: '已完成'
+      }
+    ],
     templateList: [],
     templateListLoadStatus: 0,
     pageLoading: false,
@@ -34,7 +50,13 @@ Page({
   },
 
   onLoad() {
+    this.setData({
+      galleryTab: app.globalData.galleryTab
+    });
+
     this.init();
+
+    app.globalData.galleryTab = 0;
   },
 
   onReachBottom() {
@@ -68,9 +90,22 @@ Page({
 
   taskListClickHandle(e) {
     console.log(e);
-    const image = e.detail.task.creations_preview_img;
+    const task = e.detail.task;
+
+    app.globalData.previewTask = task;
+
+    wx.navigateTo({
+      url: `/pages/gallery/preview/index?task_id=${task.id}`,
+    });
+    // const image = e.detail.task.creations_preview_img;
 
     // TODO 四选一
   },
+
+  tabChangeHandle(e) {
+    this.setData({
+      galleryTab: e.detail.value,
+    });
+  }
 
 });

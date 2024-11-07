@@ -6,6 +6,10 @@ Component({
       type: Array,
       value: [],
     },
+    galleryTab: {
+      type: Number,
+      value: 0,
+    },
     id: {
       type: String,
       value: '',

@@ -1,4 +1,5 @@
 import { config } from '../../config/index';
+import request from '../_utils/request';
 
 /** 获取模板列表 */
 function mockFetchTemplateList(pageIndex = 1, pageSize = 20) {
@@ -18,18 +19,22 @@ export function fetchTemplateList(pageIndex = 1, pageSize = 20) {
   if (config.useMock) {
     return mockFetchTemplateList(pageIndex, pageSize);
   }
-  return new Promise((resolve) => {
-    wx.request({
-      url: `http://${config.host}/design/templates/`,
-      method: 'GET',
-      data: {},
-      success: (res) => {
-        config.log && console.log('fetchTemplateList', res.data)
-        resolve(res.data.map((item) => ({
-          ...item,
-          id: item._id,
-        })));
-      }
-    })
+
+  return request({
+    url: `http://${config.host}/design/templates/`,
+    method: 'GET',
+    data: {},
+    success: (resolve, res) => {
+      config.log && console.log('fetchTemplateList', res)
+      // resolve(res);
+      resolve(res.map((item) => ({
+        ...item,
+        id: item._id,
+      })));
+    },
+    fail: (reject, err) => {
+      config.log && console.log('fetchTemplateList err', err)
+      reject(err);
+    }
   });
 }

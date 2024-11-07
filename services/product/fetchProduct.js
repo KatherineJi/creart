@@ -1,4 +1,5 @@
 import { config } from '../../config/index';
+import request from '../_utils/request';
 
 /** 获取商品列表 */
 function mockFetchProduct(pid = 0) {
@@ -12,15 +13,18 @@ export function fetchProduct(pid = 0) {
   if (config.useMock) {
     return mockFetchProduct(pid);
   }
-  return new Promise((resolve) => {
-    wx.request({
-      url: `http://${config.host}/products/${pid}`,
-      method: 'GET',
-      data: {},
-      success: (res) => {
-        config.log && console.log('fetchProduct', res.data)
-        resolve(res.data);
-      }
-    })
+
+  return request({
+    url: `http://${config.host}/products/${pid}`,
+    method: 'GET',
+    data: {},
+    success: (resolve, res) => {
+      config.log && console.log('fetchProduct', res)
+      resolve(res);
+    },
+    fail: (reject, err) => {
+      config.log && console.log('fetchProduct err', err)
+      reject(err);
+    }
   });
 }

@@ -7,6 +7,7 @@
     "pages/order/choose-image/index",
     "pages/order/image-cropper/index",
     "pages/gallery/index",
+    "pages/gallery/preview/index",
     "pages/gallery/choose-gallery/index",
     "pages/workflow/pic-styles/index",
     "pages/workflow/generate/index",
@@ -41,11 +42,7 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "定制"
-      },
-      {
-        "pagePath": "pages/product/category/index",
-        "text": "分类"
+        "text": "首页"
       },
       {
         "pagePath": "pages/gallery/index",

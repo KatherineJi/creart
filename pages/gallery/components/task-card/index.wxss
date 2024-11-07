@@ -42,6 +42,30 @@
   overflow: hidden;
 }
 
+.status-wrapper {
+  position: absolute;
+  background-color: black;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-text {
+  font-size: 48rpx;
+  color: white;
+}
+
+.title {
+  position: absolute;
+  bottom: 24rpx;
+  left: 24rpx;
+  color: white;
+}
+
 .task-card__body {
   width: 100%;
   box-sizing: border-box;
@@ -79,6 +103,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin: 8rpx 0 0 0;
+}
+
+.task-card__tag {
+  margin: 0 8rpx 8rpx 0;
 }
 
 .task-card__tag-positive {

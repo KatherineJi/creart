@@ -1,0 +1,10 @@
+function defineObjectValues(obj) {
+  return Object.keys(obj).map(function (key) {
+    return obj[key];
+  });
+  // return Object.values(obj);
+}
+
+module.exports = {
+  objValues: defineObjectValues,
+};

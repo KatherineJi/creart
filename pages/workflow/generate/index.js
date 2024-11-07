@@ -2,11 +2,15 @@ import { fetchTemplate } from '../../../services/workflow/fetchTemplate';
 import { uploadImage } from '../../../services/workflow/uploadImage';
 import { generateImage } from '../../../services/workflow/generateImage';
 import Toast from 'tdesign-miniprogram/toast/index';
+import Message from 'tdesign-miniprogram/message/index';
+
+const app = getApp();
 
 Page({
   data: {
     template_id: 0,
     template: {},
+    formImage: null,
     formData: [],
     autosize: {
       maxHeight: 120,
@@ -14,6 +18,11 @@ Page({
     },
     fileList: [],
     formValue: {},
+    // 0: 上传前 1: 上传中 2: 上传成功 99: 上传失败 3: 生成前 4: 开始生成
+    generateStatus: 0,
+    uploadImageUrl: '',
+
+    themeList: ['danger', 'success', 'warning', 'primary'],
 
     imgSrcs: [],
     tabList: [],
@@ -26,6 +35,12 @@ Page({
     interval: 5000,
     navigation: { type: 'dots' },
     swiperImageProps: { mode: 'scaleToFill' },
+
+    gridConfig: {
+      column: 1,
+      width: 640,
+      height: 640,
+    },
   },
 
   goodListPagination: {
@@ -66,16 +81,43 @@ Page({
       pageLoading: true,
     });
 
+    const formValue = {};
+
     fetchTemplate(this.data.template_id).then((data) => {
-      this.setData({
-        template: data,
-        formData: Object.keys(data.workflow.params).map(key => {
-          return {
-            ...data.workflow.params[key],
+      const formData = [];
+      let formImage = null;
+
+      Object.keys(data.workflow.params).forEach(key => {
+        const item = data.workflow.params[key];
+        if (item?.type === 'image') {
+          formImage = {
+            ...item,
             key
           };
-        }),
+        } else {
+          if (item.type === 'select' && item.options) {
+            item.keys = item.options.map(option => option.key)
+            // Object.keys(item.options);
+            if (item.required && item.default) {
+              formValue[key] = item.default;
+            }
+          }
+          formData.push({
+            ...item,
+            key
+          });
+        }
+      });
+
+      console.log(formValue);
+
+      this.setData({
+        template: data,
+        formData,
+        formValue,
+        formImage,
         pageLoading: false,
+        generateStatus: !!formImage ? 0 : 3,
       });
     });
   },
@@ -102,6 +144,7 @@ Page({
     fileList.splice(index, 1);
     this.setData({
       fileList,
+      generateStatus: 0,
     });
   },
 
@@ -115,11 +158,44 @@ Page({
     console.log(e);
   },
 
+  onOptionSelect(e) {
+    this.setData({
+      formValue: {
+        ...this.data.formValue,
+        [e.mark.key]: e.mark.value,
+      },
+    });
+    console.log(e);
+  },
+
   async handleFileUpload() {
     const { template_id, fileList, formValue, formData } = this.data;
+
+    if (!fileList.length) {
+      Message.info({
+        context: this,
+        offset: [32, 32],
+        duration: 3000,
+        // icon: false,
+        // single: false, // 打开注释体验多个消息叠加效果
+        content: '请选择参考图',
+      });
+      return;
+    }
+
+    this.setData({
+      generateStatus: 1,
+    });
+
     const res = await uploadImage(fileList[0]);
-    // console.log(res);
-    return res.file_name;
+    console.log(res);
+
+    // TODO 先不管失败-99
+    this.setData({
+      generateStatus: 2,
+      uploadImageUrl: res.file_name || res.path,
+    });
+
     // return new Promise((resolve) => {
     //   uploadImage(fileList[0]).then((res) => {
     //     console.log('1', res, res.file_name)
@@ -128,11 +204,37 @@ Page({
     // })
   },
 
+  handleFileReupload() {
+    this.setData({
+      fileList: [],
+      generateStatus: 0,
+    });
+  },
+
+  handleNext() {
+    this.setData({
+      generateStatus: this.data.generateStatus + 1,
+    });
+  },
+
+  handleBack() {
+    this.setData({
+      generateStatus: 2,
+    });
+  },
+
+  handleJumpGallery() {
+    // app.globalData.galleryTab = 2;
+    wx.switchTab({
+      url: '/pages/gallery/index',
+    });
+  },
+
   async handleFormSubmit(e) {
-    const { template_id, fileList, formValue, formData } = this.data;
+    const { template_id, formImage, formValue, formData, uploadImageUrl } = this.data;
 
     // 先上传图片
-    let imageUrl = await this.handleFileUpload();
+    // let imageUrl = await this.handleFileUpload();
     //   this.handleFileUpload().then((imageUrl) => {
     //     console.log('2', imageUrl)
     //     this.handleGenerateImage(imageUrl);
@@ -145,15 +247,25 @@ Page({
     // 提交表单
     const params = {};
 
-    console.log(imageUrl, formData);
     formData.forEach((item) => {
       if (item.type === 'string') {
         params[item.key] = formValue[item.key];
-      } else if (item.type === 'image') {
+      } else if (item.type === 'select') {
         // TODO 校验
-        params[item.key] = imageUrl;
+        params[item.key] = formValue[item.key];
       }
+      // else if (item.type === 'image') {
+      //   // TODO 校验
+      //   params[item.key] = uploadImageUrl;
+      // }
     });
+
+    if (formImage) {
+      // TODO 校验
+      params[formImage.key] = uploadImageUrl;
+    }
+
+    console.log('params', params);
 
     const res = await generateImage({
       template_id,
@@ -164,34 +276,10 @@ Page({
 
     // TODO bug 提示 + 跳转
     if (res.task_id) {
-      const count = 3;
-      (new Array(count)).forEach((t, i) => {
-        const cur = count - i;
-        setTimeout(() => {
-          Toast({
-            context: this,
-            selector: '#t-success-toast',
-            message: `创建任务成功！${cur}s后跳转至画廊...`,
-            duration: cur * 1000,
-            theme: 'success',
-            direction: 'column',
-          });
-        }, i * 1000)
+      this.setData({
+        // fileList: [],
+        generateStatus: 4,
       });
-
-      Toast({
-        context: this,
-        selector: '#t-success-toast',
-        message: `创建任务成功！3s后跳转至画廊...`,
-        duration: 3000, // cur * 1000,
-        theme: 'success',
-        direction: 'column',
-      });
-      setTimeout(() => {
-        wx.switchTab({
-          url: '/pages/gallery/index',
-        })
-      }, 3000)
     }
   },
 
@@ -234,7 +322,7 @@ Page({
       this.goodListPagination.index = pageIndex;
       this.goodListPagination.num = pageSize;
     } catch (err) {
-      this.setData({ templateListLoadStatus: 3 });
+      this.setData({ templateListLoadStatus: 99 });
     }
   },
 

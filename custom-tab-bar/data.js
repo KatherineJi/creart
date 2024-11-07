@@ -1,13 +1,8 @@
 export default [
   {
     icon: 'home',
-    text: '定制',
+    text: '首页',
     url: 'pages/home/home',
-  },
-  {
-    icon: 'sort',
-    text: '分类',
-    url: 'pages/product/category/index',
   },
   {
     icon: 'cart',

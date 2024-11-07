@@ -1,3 +1,4 @@
+<!-- <wxs src="/utils/obj.wxs" module="toolObj" /> -->
 <view
   id="{{independentID}}"
   class="task-card"
@@ -10,24 +11,24 @@
         src="{{ task.creations_preview_img }}"
         mode="aspectFill"
         lazy-load /> -->
-      <image style="width: 100%; height: 100%; background-color: #eeeeee;" src="{{task.creations_preview_img}}"></image>
+      <image style="width: 100%; height: 100%; background-color: #eeeeee;" src="{{task.img}}"></image>
+      <view class="status-wrapper" wx:if="{{task.status !== 2}}">
+        <view class="status-text">{{statusMap[task.status || 0]}}</view>
+      </view>
+      <view class="title">{{task.creation_template_tags[0] || '贴纸'}}</view>
     </view>
     <view class="task-card__body">
       <view class="task-card__upper">
         <view wx:if="{{ task.params }}" class="task-card__tags">
-          <view
-            class="task-card__tag-positive">
-            {{task.params.positive}}
-          </view>
-          <view
-            class="task-card__tag-negative">
-            {{task.params.negative}}
-          </view>
+          <t-tag class="task-card__tag" wx:for="{{ task.tags }}" wx:key="param" wx:for-item="param"
+              variant="light"
+              theme="success"
+              shape="round">{{param}}</t-tag>
         </view>
       </view>
-      <view class="task-card__down">
-        <view class="task-card__status"> 状态：{{ statusMap[task.status] }} </view>
-      </view>
+      <!-- <view class="task-card__down">
+        <view class="task-card__status"> 状态：{{ task.status }} </view>
+      </view> -->
     </view>
   </view>
 </view>

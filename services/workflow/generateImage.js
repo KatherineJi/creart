@@ -1,4 +1,5 @@
 import { config } from '../../config/index';
+import request from '../_utils/request';
 
 /** 获取模板列表 */
 function mockGenerateImage(params = {}) {
@@ -16,15 +17,18 @@ export function generateImage({ template_id, params }) {
   if (config.useMock) {
     return mockGenerateImage(params);
   }
-  return new Promise((resolve) => {
-    wx.request({
-      url: `http://${config.host}/render/generate/${template_id}`,
-      method: 'POST',
-      data: params,
-      success: (res) => {
-        config.log && console.log('generateImage', res.data)
-        resolve(res.data);
-      }
-    })
+
+  return request({
+    url: `http://${config.host}/render/generate/${template_id}`,
+    method: 'POST',
+    data: params,
+    success: (resolve, res) => {
+      config.log && console.log('generateImage', res)
+      resolve(res);
+    },
+    fail: (reject, err) => {
+      config.log && console.log('generateImage err', err)
+      reject(err);
+    }
   });
 }

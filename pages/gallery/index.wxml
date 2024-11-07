@@ -2,7 +2,7 @@
   <view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
     <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
   </view>
-  <view class="gallery-page-header">
+  <!-- <view class="gallery-page-header">
     <view class="search" bind:tap="navToSearchPage">
       <t-search
         t-class-input="t-search__input"
@@ -13,14 +13,16 @@
         <t-icon slot="left-icon" prefix="wr" name="search" size="40rpx" color="#bbb" />
       </t-search>
     </view>
-  </view>
-  <view class="gallery-page-container">
-    <!-- <view class="styles-page-tabs">
+  </view> -->
+  <view class="gallery-page-container" wx:else>
+    <!-- {{galleryTab}} -->
+    <view class="styles-page-tabs">
       <t-tabs
         t-class="t-tabs"
         t-class-active="tabs-external__active"
         t-class-item="tabs-external__item"
         defaultValue="{{0}}"
+        value="{{galleryTab}}"
         space-evenly="{{false}}"
         bind:change="tabChangeHandle">
         <t-tab-panel
@@ -30,10 +32,11 @@
           label="{{item.text}}"
           value="{{item.key}}" />
       </t-tabs>
-    </view> -->
+    </view>
     <task-list
       wr-class="task-list-container"
       taskList="{{taskList}}"
+      galleryTab="{{galleryTab}}"
       bind:click="taskListClickHandle" />
     <load-more list-is-empty="{{!templateList.length}}" status="{{templateListLoadStatus}}" bind:retry="onReTry" />
     <t-toast id="t-toast" />

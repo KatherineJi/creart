@@ -29,7 +29,11 @@ Component({
         this.setData({
           task: {
             ...data,
-            creations_preview_img: data.creations_preview_img.startsWith('http') ? data.creations_preview_img : `http://${config.host}/users/file/${data.creations_preview_img}`,
+            // img: data.preview_img ? 
+            img: data.preview_img?.startsWith('http') ? data.preview_img : `http://${config.host}${data.preview_img}`,
+            tags: Object.values(data.params),
+            creations_preview_img: data.creations_preview_img?.startsWith('http') ? data.creations_preview_img : `http://${config.host}/users/file/${data.creations_preview_img}`,
+            tags: Object.values(data.params),
           }, isValidityLinePrice
         });
       },
@@ -57,8 +61,8 @@ Component({
     task: { id: '' },
     isValidityLinePrice: false,
     statusMap: {
-      0: '待开始',
-      1: '处理中',
+      0: '队列中',
+      1: '生成中',
       2: '已完成',
     }
   },

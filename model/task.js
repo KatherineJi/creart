@@ -7,13 +7,13 @@ const allTasks = [
     template_id: 'tid_001',
     prompt_id: 'pid_001',
     params: {
-      image: 'https://qcloudimg.tencent-cloud.cn/raw/4a29d51b504f12b4933ce4490110b4dc.svg',
       negative: '抽象',
-      positive: '漫画'
+      positive: '漫画',
+      hair_color: '浅粉色'
     },
     modified_at: '2024-07-14T17:42:57.841000',
     creations_preview_img: 'https://qcloudimg.tencent-cloud.cn/raw/4a29d51b504f12b4933ce4490110b4dc.svg',
-    creation_template_tags: ['测试标签'],
+    creation_template_tags: ['油画风'],
     created_by: '1',
     created_at: '2024-07-14T17:42:07.675000',
     status: 0,
@@ -22,7 +22,6 @@ const allTasks = [
     id: "taskid_002",
     template_id: 'tid_002',
     params: {
-      image: 'https://qcloudimg.tencent-cloud.cn/raw/4a29d51b504f12b4933ce4490110b4dc.svg',
       negative: '抽象',
       positive: '漫画'
     },
@@ -33,7 +32,6 @@ const allTasks = [
     id: "taskid_003",
     template_id: 'tid_003',
     params: {
-      image: 'https://qcloudimg.tencent-cloud.cn/raw/4a29d51b504f12b4933ce4490110b4dc.svg',
       negative: '抽象',
       positive: '漫画'
     },

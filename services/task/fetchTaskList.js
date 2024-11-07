@@ -1,4 +1,5 @@
 import { config } from '../../config/index';
+import request from '../_utils/request';
 
 /** 获取模板列表 */
 function mockFetchTaskList(pageIndex = 1, pageSize = 20) {
@@ -18,15 +19,18 @@ export function fetchTaskList(pageIndex = 1, pageSize = 20) {
   if (config.useMock) {
     return mockFetchTaskList(pageIndex, pageSize);
   }
-  return new Promise((resolve) => {
-    wx.request({
-      url: `http://${config.host}/users/tasks/`,
-      method: 'GET',
-      data: {},
-      success: (res) => {
-        config.log && console.log('fetchTaskList', res.data)
-        resolve(res.data);
-      }
-    })
+
+  return request({
+    url: `http://${config.host}/users/tasks/`,
+    method: 'GET',
+    data: {},
+    success: (resolve, res) => {
+      config.log && console.log('fetchTaskList', res)
+      resolve(res);
+    },
+    fail: (reject, err) => {
+      config.log && console.log('fetchTaskList err', err)
+      reject(err);
+    }
   });
 }

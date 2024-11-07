@@ -1,0 +1,33 @@
+.gallery-detail {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 96rpx);
+}
+
+.gallery-detail-page-container {
+  display: block;
+  padding: 0 48rpx;
+  margin-top: 24rpx;
+}
+
+.image-wrapper {
+  width: 654rpx;
+  height: 654rpx;
+  margin: 0 auto;
+  padding-bottom: 24rpx;
+  border-bottom: 1px solid grey;
+}
+
+.details-wrapper {
+}
+
+.detail-item {
+  margin: 22rpx 0;
+  border-bottom: 1px solid black;
+}
+
+.form-item-title {
+  font-size: 32rpx;
+}
+
+.detail-item .t-tag {
+  margin: 24rpx 24rpx 24rpx 0;
+}
