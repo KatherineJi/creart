@@ -12,11 +12,10 @@ exports.main = async (data, context) => {
   const {
     url,
     method,
+    fileName,
     fileID,
-    // data: requestData,
   } = data;
 
-  const fileStream = fs.createReadStream(path.join(__dirname, fileID))
   const fileRes = await cloud.downloadFile({
     fileID: fileID,
   })
@@ -31,19 +30,15 @@ exports.main = async (data, context) => {
     uri: url,
     json: true,
     formData: {
-      file_name: result.fileList[0]
-      // fileRes.tempFilePath,
-
-      // fileID, // fs.createReadStream(fileID),   // 这里是关键
-      // 其他需要的字段值，比如 x y w h
+      file: {
+        value: fileRes.fileContent,
+        options: {
+          filename: fileName,
+          // contentType: 'image/jpg'
+        }
+      }
     },
   };
-
-  // if (method === 'GET') {
-  //   config.qs = requestData || {}
-  // } else if (method === 'POST') {
-  //   config.body = requestData || {}
-  // }
 
   const res = await rp(config)
 

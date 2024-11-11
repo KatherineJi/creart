@@ -193,7 +193,7 @@ Page({
     // TODO 先不管失败-99
     this.setData({
       generateStatus: 2,
-      uploadImageUrl: res.file_name || res.path,
+      uploadImageUrl: res.file_name || res.path || res,
     });
 
     // return new Promise((resolve) => {

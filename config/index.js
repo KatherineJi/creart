@@ -1,11 +1,10 @@
 export const config = {
   /** 是否使用mock代替api返回 */
-  useMock: true,
+  // useMock: true,
   useCloudRemote: true,
   cloudEnv: 'creart-test-1g2yuv6d82b517bf',
   log: true,
-  host: '10.79.0.222:8000'
-  // host: '101.43.108.238:8000',
+  host: '101.43.108.238:8000',
 };
 
 export const cdnBase =

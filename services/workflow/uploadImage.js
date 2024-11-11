@@ -13,17 +13,18 @@ function mockUploadImage(file = {}) {
 
 /** 获取模板列表 */
 export function uploadImage(file = {}) {
-  // if (config.useMock) {
-  //   return mockUploadImage(file);
-  // }
+  if (config.useMock) {
+    return mockUploadImage(file);
+  }
 
   return uploadRequest({
     url: `http://${config.host}/users/file`,
     fileName: file.name,
     filePath: file.url,
     success: (resolve, res) => {
-      let data = res.fileList[0].tempFileURL;
+      // res.fileList[0].tempFileURL;
       console.log('res', res);
+      let data = res.file_name;
       // data = JSON.parse(data)
       console.log('data', data);
       resolve(data);

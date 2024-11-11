@@ -42,46 +42,33 @@ export function uploadRequest({
   return new Promise((resolve, reject) => {
     if (config.useCloudRemote) {
       const cloudPath = `uploads/${Date.now()}-${fileName}`;
-      console.log('cloudPath', cloudPath);
       wx.cloud.uploadFile({
-        cloudPath: cloudPath, // `uploads/${Date.now()}-${filePath}`,
+        cloudPath: cloudPath,
         filePath: filePath,
       }).then(res => {
         // get resource ID
-        console.log(res);
+        console.log('uploadFile res', res);
 
-        wx.cloud.getTempFileURL({
-          fileList: [res.fileID],
-          success: res => {
-            // get temp file URL
-            console.log(res)
-            success(resolve, res)
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'remote-upload',
+          // 传给云函数的参数
+          data: {
+            url,
+            method: 'POST',
+            // cloudPath: cloudPath,
+            fileName,
+            filePath,
+            fileID: res.fileID,
           },
-          fail: err => {
-            // handle error
-            fail(reject, err)
-          }
+        }).then(uploadRes => {
+          console.log('uploadRes', uploadRes)
+          // TODO
+          success(resolve, uploadRes.result)
+        }).catch(error => {
+          // handle error
+          fail(reject, error)
         })
-
-
-        // wx.cloud.callFunction({
-        //   // 云函数名称
-        //   name: 'remote-upload',
-        //   // 传给云函数的参数
-        //   data: {
-        //     url,
-        //     method: 'POST',
-        //     // cloudPath: cloudPath,
-        //     fileID: res.fileID,
-        //   },
-        // }).then(uploadRes => {
-        //   console.log('uploadRes', uploadRes)
-        //   // TODO
-        //   success(resolve, uploadRes)
-        // }).catch(error => {
-        //   // handle error
-        //   fail(reject, error)
-        // })
       }).catch(err => {
         // handle error
         fail(reject, err)
