@@ -1,0 +1,15 @@
+.tasks-page {
+  /* padding-bottom: calc(env(safe-area-inset-bottom) + 110rpx); */
+}
+
+.tasks-page-container,
+.tasks-page-header {
+  display: block;
+  padding: 0;
+  margin-top: 24rpx;
+}
+
+.tasks-page-container {
+  background: #f5f5f5 !important;
+  margin-top: 16rpx;
+}

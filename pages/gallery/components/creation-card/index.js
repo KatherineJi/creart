@@ -27,11 +27,12 @@ Component({
           isValidityLinePrice = false;
         }
         this.setData({
-          task: {
+          creation: {
             ...data,
-            img: data.preview_img?.[0], // `http://${config.host}/output/1/${data.file_name}`,
+            img: `http://${config.host}/output/1/${data.file_name}`,
             // img: data.preview_img?.startsWith('http') ? data.preview_img : `http://${config.host}${data.preview_img}`,
             tags: data.params.map(item => item.value),
+            // tags: Object.values(data.params),
             creations_preview_img: data.creations_preview_img?.startsWith('http') ? data.creations_preview_img : `http://${config.host}/users/file/${data.creations_preview_img}`,
           }, isValidityLinePrice
         });
@@ -57,7 +58,7 @@ Component({
 
   data: {
     independentID: '',
-    task: { id: '' },
+    creation: { id: '' },
     isValidityLinePrice: false,
     statusMap: {
       0: '队列中',
@@ -79,11 +80,11 @@ Component({
 
   methods: {
     clickHandle() {
-      this.triggerEvent('click', { task: this.data.task });
+      this.triggerEvent('click', { creation: this.data.creation });
     },
 
     clickThumbHandle() {
-      this.triggerEvent('thumb', { task: this.data.task });
+      this.triggerEvent('thumb', { creation: this.data.creation });
     },
 
     addCartHandle(e) {
@@ -93,7 +94,7 @@ Component({
         ...e.detail,
         id,
         cardID,
-        task: this.data.task,
+        creation: this.data.creation,
       });
     },
 
@@ -102,7 +103,7 @@ Component({
       if (id) {
         independentID = id;
       } else {
-        independentID = `task-card-${~~(Math.random() * 10 ** 8)}`;
+        independentID = `creation-card-${~~(Math.random() * 10 ** 8)}`;
       }
       this.setData({ independentID });
     },
@@ -139,7 +140,7 @@ Component({
 
     intersectionObserverCB() {
       this.triggerEvent('ob', {
-        task: this.data.task,
+        creation: this.data.creation,
         context: this.intersectionObserverContext,
       });
     },

@@ -1,7 +1,6 @@
 <view class="task-list-wrap wr-class" id="{{independentID}}">
 	<block wx:for="{{taskList}}" wx:for-item="item" wx:key="index">
 		<task-card
-      wx:if="{{galleryTab === 0 || item.status === galleryTab}}"
 		  id="{{independentID}}-gd-{{index}}"
 		  data="{{item}}"
 		  currency="{{item.currency || '¥'}}"

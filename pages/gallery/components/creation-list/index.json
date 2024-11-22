@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+      "creation-card": "../creation-card/index"
+  }
+}

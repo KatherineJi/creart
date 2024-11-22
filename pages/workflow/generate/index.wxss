@@ -5,7 +5,7 @@
   min-height: 100vh;
 }
 
-.styles-page-container .template-list-container {
+.template-list-container {
   background: #f5f5f5 !important;
   margin-top: 16rpx;
 }

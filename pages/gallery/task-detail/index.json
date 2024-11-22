@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "画廊",
+  "navigationBarTitleText": "队列详情",
   "onReachBottomDistance": 10,
   "backgroundTextStyle": "light",
   "enablePullDownRefresh": true,
@@ -12,10 +12,7 @@
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-toast": "tdesign-miniprogram/toast/toast",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
-    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
-    "t-progress": "tdesign-miniprogram/progress/progress",
-    "t-button": "tdesign-miniprogram/button/button",
-    "creation-list": "./components/creation-list/index",
-    "load-more": "/components/load-more/index"
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
   }
 }

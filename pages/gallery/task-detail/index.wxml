@@ -6,20 +6,20 @@
   <view class="gallery-detail-page-container" wx:else>
     <!-- {{galleryTab}} -->
     <view class="image-wrapper">
-      <!-- <t-image style="width: 100%; height: 100%;" show-menu-by-longpress src="{{creation.img}}"></t-image> -->
-      <image style="width: 100%; height: 100%;" show-menu-by-longpress src="{{creation.img}}"></image>
+      <!-- <t-image style="width: 100%; height: 100%;" show-menu-by-longpress src="{{task.img}}"></t-image> -->
+      <image style="width: 100%; height: 100%;" show-menu-by-longpress src="{{task.img}}"></image>
     </view>
     <view class="details-wrapper">
       <view class="detail-item">
         <view class="form-item-title">风格模板</view>
         <view>
-          <t-tag class="style" variant="light" theme="primary" shape="round">{{creation.creation_template_name}}</t-tag>
+          <t-tag class="style" variant="light" theme="primary" shape="round">{{task.creation_template_name}}</t-tag>
         </view>
       </view>
       <view class="detail-item">
         <view class="form-item-title">生成参数</view>
         <view>
-          <t-tag class="params" wx:for="{{ creation.tags }}" wx:key="param" wx:for-item="param"
+          <t-tag class="params" wx:for="{{ task.tags }}" wx:key="param" wx:for-item="param"
               variant="light"
               theme="{{themeList[toolNum.rdiv(index, 4)]}}"
               shape="round">{{param}}</t-tag>

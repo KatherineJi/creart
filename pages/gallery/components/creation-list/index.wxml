@@ -1,0 +1,16 @@
+<view class="creation-list-wrap wr-class" id="{{independentID}}">
+	<block wx:for="{{creationList}}" wx:for-item="item" wx:key="index">
+		<creation-card
+		  id="{{independentID}}-gd-{{index}}"
+		  data="{{item}}"
+		  currency="{{item.currency || '¥'}}"
+		  thresholds="{{thresholds}}"
+		  class="creation-card-inside"
+		  data-index="{{index}}"
+		  bind:thumb="onClickCreationThumb"
+		  bind:click="onClickCreation"
+		  bind:add-cart="onAddCart"
+		/>
+	</block>
+</view>
+

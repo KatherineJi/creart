@@ -15,8 +15,8 @@
     </view>
   </view> -->
   <view class="gallery-page-container" wx:else>
-    <!-- {{galleryTab}} -->
-    <view class="styles-page-tabs">
+    <t-button class="jump-button" theme="danger">制作你的专属贴纸</t-button>
+    <!-- <view class="styles-page-tabs">
       <t-tabs
         t-class="t-tabs"
         t-class-active="tabs-external__active"
@@ -32,13 +32,23 @@
           label="{{item.text}}"
           value="{{item.key}}" />
       </t-tabs>
-    </view>
-    <task-list
-      wr-class="task-list-container"
-      taskList="{{taskList}}"
+    </view> -->
+    <creation-list
+      wr-class="creation-list-container"
+      creationList="{{creationList}}"
       galleryTab="{{galleryTab}}"
-      bind:click="taskListClickHandle" />
+      bind:click="creationListClickHandle" />
     <load-more list-is-empty="{{!templateList.length}}" status="{{templateListLoadStatus}}" bind:retry="onReTry" />
     <t-toast id="t-toast" />
+  </view>
+  <view class="gallery-page-bottom" wx:if="{{notFinishedTaskList.length}}">
+    <view class="bottom-left">
+      <view>正在生成 TODO个</view>
+      <!-- <t-progress percentage="80" label="" /> -->
+    </view>
+    <t-button theme="danger" bind:tap="tasksJumpClickHandle">查看队列</t-button>
+  </view>
+  <view class="gallery-page-side" bind:tap="tasksJumpClickHandle" wx:else>
+    历史队列
   </view>
 </view>

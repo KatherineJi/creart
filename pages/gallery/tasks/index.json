@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "画廊",
+  "navigationBarTitleText": "生成记录",
   "onReachBottomDistance": 10,
   "backgroundTextStyle": "light",
   "enablePullDownRefresh": true,
@@ -15,7 +15,7 @@
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "t-progress": "tdesign-miniprogram/progress/progress",
     "t-button": "tdesign-miniprogram/button/button",
-    "creation-list": "./components/creation-list/index",
+    "task-list": "../components/task-list/index",
     "load-more": "/components/load-more/index"
   }
 }

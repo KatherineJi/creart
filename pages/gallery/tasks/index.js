@@ -1,5 +1,4 @@
-import { fetchNotFinishedTaskList } from '../../services/task/fetchNotFinishedTaskList';
-import { fetchCreationList } from '../../services/creation/fetchCreationList';
+import { fetchTaskList } from '../../../services/task/fetchTaskList';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 const app = getApp();
@@ -7,8 +6,7 @@ const app = getApp();
 Page({
   data: {
     galleryTab: 0,
-    creationList: [],
-    notFinishedTaskList: [],
+    taskList: [],
     skuId: '',
     isChooseImage: false,
 
@@ -47,10 +45,6 @@ Page({
     tabIndex: 0,
   },
 
-  onShow() {
-    this.getTabBar().init();
-  },
-
   onLoad() {
     this.setData({
       galleryTab: app.globalData.galleryTab
@@ -82,45 +76,32 @@ Page({
       pageLoading: true,
     });
 
-    fetchCreationList().then((list) => {
+    fetchTaskList().then((list) => {
       this.setData({
-        creationList: list,
+        taskList: list,
         pageLoading: false,
       });
     });
-
-    fetchNotFinishedTaskList().then((list) => {
-      this.setData({
-        notFinishedTaskList: list,
-      });
-    });
   },
 
-  creationListClickHandle(e) {
+  taskListClickHandle(e) {
     console.log(e);
-    const creation = e.detail.creation;
+    const task = e.detail.task;
 
-    app.globalData.previewCreation = creation;
+    app.globalData.previewTask = task;
 
     wx.navigateTo({
-      url: `/pages/gallery/preview/index?creation_id=${creation.id}`,
+      url: `/pages/gallery/task-detail/index?task_id=${task.id}`,
     });
-    // const image = e.detail.task.creations_preview_img;
+    // const image = e.detail.task.tasks_preview_img;
 
     // TODO 四选一
-  },
-
-  tasksJumpClickHandle(e) {
-    console.log(e);
-    wx.navigateTo({
-      url: '/pages/gallery/tasks/index',
-    });
   },
 
   tabChangeHandle(e) {
     this.setData({
       galleryTab: e.detail.value,
     });
-  },
+  }
 
 });

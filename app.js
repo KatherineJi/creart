@@ -13,6 +13,7 @@ App({
   },
   globalData: {
     galleryTab: 0,
+    previewCreation: {},
     previewTask: {},
   },
 });

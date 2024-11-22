@@ -1,0 +1,36 @@
+<!-- <wxs src="/utils/obj.wxs" module="toolObj" /> -->
+<view
+  id="{{independentID}}"
+  class="creation-card"
+  bind:tap="clickHandle"
+>
+  <view class="creation-card__main">
+    <view class="creation-card__thumb" bind:tap="clickThumbHandle">
+      <!-- <t-image
+        t-class="creation-card__img"
+        src="{{ creation.creations_preview_img }}"
+        mode="aspectFill"
+        lazy-load /> -->
+      <image style="width: 100%; height: 100%; background-color: #eeeeee;" src="{{creation.img}}"></image>
+      <!-- <view class="status-wrapper" wx:if="{{creation.status !== 2}}">
+        <view class="status-text">{{statusMap[creation.status || 0]}}</view>
+      </view> -->
+      <view class="title">
+        {{creation.creation_template_name || '贴纸'}}
+      </view>
+    </view>
+    <view class="creation-card__body">
+      <view class="creation-card__upper">
+        <view wx:if="{{ creation.params }}" class="creation-card__tags">
+          <t-tag class="creation-card__tag" wx:for="{{ creation.tags }}" wx:key="param" wx:for-item="param"
+            variant="light"
+            theme="success"
+            shape="round">{{param}}</t-tag>
+        </view>
+      </view>
+      <!-- <view class="creation-card__down">
+        <view class="creation-card__status"> 状态：{{ creation.status }} </view>
+      </view> -->
+    </view>
+  </view>
+</view>
