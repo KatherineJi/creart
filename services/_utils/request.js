@@ -8,6 +8,10 @@ export default function request({
   fail,
 }) {
   return new Promise((resolve, reject) => {
+    const headers = {
+      'Authorization': `Bearer ${wx.getStorageSync('accessToken')}`,
+    };
+
     if (config.useCloudRemote) {
       wx.cloud.callFunction({
         // 云函数名称
@@ -17,6 +21,7 @@ export default function request({
           url,
           method,
           data,
+          headers,
         },
       }).then(res => success(resolve, res.result)).catch(err => fail(reject, err))
       // .then(res => console.log(res)).catch(err => console.log(err))
@@ -25,6 +30,7 @@ export default function request({
         url,
         method,
         data,
+        header: headers,
         success: res => success(resolve, res.data),
         fail: err => fail(reject, err),
       })
