@@ -21,7 +21,7 @@
     </view>
     <view class="creation-card__body">
       <view class="creation-card__upper">
-        <view wx:if="{{ creation.params }}" class="creation-card__tags">
+        <view wx:if="{{ creation.param_list }}" class="creation-card__tags">
           <t-tag class="creation-card__tag" wx:for="{{ creation.tags }}" wx:key="param" wx:for-item="param"
             variant="light"
             theme="success"
