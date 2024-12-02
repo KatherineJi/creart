@@ -87,29 +87,50 @@ Page({
       const formData = [];
       let formImage = null;
 
-      Object.keys(data.workflow.params).forEach(key => {
-        const item = data.workflow.params[key];
-        if (item?.type === 'image') {
+      // Object.keys(data.workflow.params).forEach(key => {
+      //   const item = data.workflow.params[key];
+      //   if (item?.type === 'image') {
+      //     formImage = {
+      //       ...item,
+      //       key
+      //     };
+      //   } else {
+      //     if (item.type === 'select' && item.options) {
+      //       item.keys = item.options.map(option => option.key)
+      //       // Object.keys(item.options);
+      //       if (item.required && item.default) {
+      //         formValue[key] = item.default;
+      //       }
+      //     }
+      //     formData.push({
+      //       ...item,
+      //       key
+      //     });
+      //   }
+      // });
+      data.param_list.forEach(item => {
+        const { key, type, options, required, default: defaultValue } = item;
+
+        if (type === 'image') {
           formImage = {
             ...item,
             key
           };
         } else {
-          if (item.type === 'select' && item.options) {
-            item.keys = item.options.map(option => option.key)
-            // Object.keys(item.options);
-            if (item.required && item.default) {
-              formValue[key] = item.default;
+          if (type === 'select' && options) {
+            item.keys = options.map(option => option.key);
+            if (required && defaultValue) {
+              formValue[key] = defaultValue;
             }
           }
           formData.push({
             ...item,
-            key
+            // key
           });
         }
       });
-
-      console.log(formValue);
+      console.log('formData', formData);
+      console.log('formValue', formValue);
 
       this.setData({
         template: data,
