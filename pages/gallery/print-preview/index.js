@@ -9,6 +9,7 @@ Page({
     img: '',
     creation: {},
     pageLoading: false,
+    buyPopupVisible: false,
 
     themeList: ['danger', 'success', 'warning', 'primary'],
   },
@@ -27,6 +28,16 @@ Page({
 
   init() {
     // this.loadPage();
+  },
+
+  buyNowClickHandle() {
+    this.setData({ buyPopupVisible: true });
+  },
+
+  onVisibleChange(e) {
+    this.setData({
+      buyPopupVisible: e.detail.visible,
+    });
   },
 
 });

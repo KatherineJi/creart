@@ -26,12 +26,18 @@ Component({
         if (data.originPrice && data.price && data.originPrice < data.price) {
           isValidityLinePrice = false;
         }
+        const tags = [];
+        data.param_list.forEach(item => {
+          if (item.type != 'image') {
+            tags.push(item.value);
+          }
+        });
         this.setData({
           creation: {
             ...data,
             img: `http://${config.host}/output/1/${data.file_name}`,
             // img: data.preview_img?.startsWith('http') ? data.preview_img : `http://${config.host}${data.preview_img}`,
-            tags: data.param_list.map(item => item.value),
+            tags,
             // tags: Object.values(data.params),
             creations_preview_img: data.creations_preview_img?.startsWith('http') ? data.creations_preview_img : `http://${config.host}/users/file/${data.creations_preview_img}`,
           }, isValidityLinePrice

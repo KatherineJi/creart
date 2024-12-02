@@ -14,6 +14,7 @@ Page({
 
     chooseList: [],
     isChooseImage: false,
+    printLoading: false,
 
     imgSrcs: [],
     tabList: [
@@ -151,6 +152,10 @@ Page({
   },
 
   printClickHandle(e) {
+    this.setData({
+      printLoading: true,
+    });
+
     fetchExportCreations(
       // { creation_ids: 
       this.data.chooseList.map((i) => this.data.creationList[i]._id),

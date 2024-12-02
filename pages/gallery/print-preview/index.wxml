@@ -48,9 +48,16 @@
         <view class="price-fore">￥</view>
         <view class="price">0.25</view>
       </view>
-      <view class="btn">
-        立即购买
-      </view>
+      <view class="btn" bind:tap="buyNowClickHandle"> 立即购买 </view>
+      <t-popup
+        visible="{{buyPopupVisible}}"
+        bind:visible-change="onVisibleChange"
+        usingCustomNavbar
+        placement="center">
+        <view class="block">
+          <image style="width: 100%; height: 100%; background-color: #eeeeee;" src="https://6372-creart-test-1g2yuv6d82b517bf-1257609973.tcb.qcloud.la/qrcode.JPG?sign=eb1a2220abf2e48cf2f2863eed70c256&t=1733146766"></image>
+        </view>
+      </t-popup>
     </view>
   </view>
 </view>

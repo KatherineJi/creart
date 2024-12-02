@@ -53,7 +53,7 @@
       <view>已选{{chooseList.length}}/{{creationList.length}}</view>
     </view>
     <t-button bind:tap="chooseCancelClickHandle">取消</t-button>
-    <t-button theme="danger" bind:tap="printClickHandle">打印</t-button>
+    <t-button theme="danger" bind:tap="printClickHandle" loading="{{printLoading}}">打印</t-button>
   </view>
   <block wx:else>
     <view class="gallery-page-bottom" wx:if="{{notFinishedTaskList.length}}">
