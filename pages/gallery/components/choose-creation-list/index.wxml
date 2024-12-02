@@ -1,0 +1,10 @@
+<wxs src="/utils/arr.wxs" module="toolArr" />
+<view class="choose-creation-list-wrap wr-class" id="{{independentID}}">
+  <block wx:for="{{creationList}}" wx:for-item="item" wx:key="index">
+    <view class="choose-creation-wrap" data-index="{{index}}" bind:tap="onClickCreation">
+      <t-icon wx:if="{{toolArr.indexOf(chooseList || [], index) > -1}}" class="choose-icon" name="check-circle-filled" size="48rpx" color="#de1c24" />
+      <view wx:else class="not-choose-wrap"></view>
+      <image style="width: 100%; height: 100%; background-color: #eeeeee;" src="{{'http://' + host + '/output/1/' + item.file_name}}"></image>
+    </view>
+  </block>
+</view>

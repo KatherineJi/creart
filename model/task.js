@@ -6,7 +6,7 @@ const allTasks = [
     id: "taskid_001",
     template_id: 'tid_001',
     prompt_id: 'pid_001',
-    params: [{
+    param_list: [{
       "key": "angle",
       "name": "角度",
       "type": "select",
@@ -35,7 +35,7 @@ const allTasks = [
   {
     id: "taskid_002",
     template_id: 'tid_002',
-    params: [{
+    param_list: [{
       "key": "angle",
       "name": "角度",
       "type": "select",

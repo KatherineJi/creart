@@ -29,7 +29,8 @@ Component({
         this.setData({
           task: {
             ...data,
-            img: data.preview_img?.[0], // `http://${config.host}/output/1/${data.file_name}`,
+            // img: data.preview_img?.[0], 
+            img: `http://${config.host}${data.preview_img}`,
             // img: data.preview_img?.startsWith('http') ? data.preview_img : `http://${config.host}${data.preview_img}`,
             tags: data.param_list.map(item => item.value),
             creations_preview_img: data.creations_preview_img?.startsWith('http') ? data.creations_preview_img : `http://${config.host}/users/file/${data.creations_preview_img}`,

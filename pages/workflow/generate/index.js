@@ -114,7 +114,6 @@ Page({
         if (type === 'image') {
           formImage = {
             ...item,
-            key
           };
         } else {
           if (type === 'select' && options) {

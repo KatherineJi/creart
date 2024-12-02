@@ -16,5 +16,6 @@ App({
     galleryTab: 0,
     previewCreation: {},
     previewTask: {},
+    previewPrintUrl: '',
   },
 });

@@ -1,7 +1,7 @@
 export const config = {
   /** 是否使用mock代替api返回 */
   // useMock: true,
-  useCloudRemote: true,
+  // useCloudRemote: true,
   cloudEnv: 'creart-test-1g2yuv6d82b517bf',
   log: true,
   host: '101.43.108.238:8000',

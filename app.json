@@ -11,6 +11,7 @@
     "pages/gallery/tasks/index",
     "pages/gallery/task-detail/index",
     "pages/gallery/choose-gallery/index",
+    "pages/gallery/print-preview/index",
     "pages/workflow/pic-styles/index",
     "pages/workflow/generate/index",
     "pages/usercenter/index"

@@ -1,5 +1,6 @@
 import { fetchNotFinishedTaskList } from '../../services/task/fetchNotFinishedTaskList';
 import { fetchCreationList } from '../../services/creation/fetchCreationList';
+import { fetchExportCreations } from '../../services/creation/fetchExportCreations';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 const app = getApp();
@@ -10,6 +11,8 @@ Page({
     creationList: [],
     notFinishedTaskList: [],
     skuId: '',
+
+    chooseList: [],
     isChooseImage: false,
 
     imgSrcs: [],
@@ -49,6 +52,8 @@ Page({
 
   onShow() {
     this.getTabBar().init();
+
+    this.init();
   },
 
   onLoad() {
@@ -122,5 +127,48 @@ Page({
       galleryTab: e.detail.value,
     });
   },
+
+  creationChooseClickHandle(e) {
+    const targetIndex = e.detail.index;
+
+    const chooseList = [...this.data.chooseList];
+    const index = chooseList.indexOf(targetIndex);
+    if (index > -1) {
+      chooseList.splice(index, 1);
+    } else {
+      chooseList.push(targetIndex);
+    }
+
+    this.setData({
+      chooseList: chooseList,
+    });
+  },
+
+  jumpChooseClickHandle() {
+    this.setData({
+      isChooseImage: true,
+    });
+  },
+
+  printClickHandle(e) {
+    fetchExportCreations(
+      // { creation_ids: 
+      this.data.chooseList.map((i) => this.data.creationList[i]._id),
+      // }
+    ).then((data) => {
+      console.log(data);
+
+      app.globalData.previewPrintUrl = data.url;
+      wx.navigateTo({
+        url: '/pages/gallery/print-preview/index',
+      });
+    });
+  },
+
+  chooseCancelClickHandle() {
+    this.setData({
+      isChooseImage: false,
+    });
+  }
 
 });

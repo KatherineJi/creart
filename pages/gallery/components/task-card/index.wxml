@@ -17,9 +17,9 @@
       </view>
     </view>
     <view class="task-card__body">
-      <view class="title">{{task.creation_template_tags[0] || '贴纸'}}</view>
+      <view class="title">{{task.template_name || '贴纸'}}</view>
       <view class="task-card__upper">
-        <view wx:if="{{ task.params }}" class="task-card__tags">
+        <view wx:if="{{ task.param_list }}" class="task-card__tags">
           <t-tag class="task-card__tag" wx:for="{{ task.tags }}" wx:key="param" wx:for-item="param"
               variant="light"
               theme="success"

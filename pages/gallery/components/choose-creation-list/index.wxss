@@ -1,0 +1,30 @@
+.choose-creation-list-wrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0;
+}
+
+.choose-creation-wrap {
+  width: 226rpx;
+  height: 226rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 0 10rpx 0 grey;
+  margin-top: 12rpx;
+  position: relative;
+}
+
+.choose-icon {
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+}
+
+.not-choose-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+}

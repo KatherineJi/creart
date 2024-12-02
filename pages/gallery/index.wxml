@@ -15,7 +15,7 @@
     </view>
   </view> -->
   <view class="gallery-page-container" wx:else>
-    <t-button class="jump-button" theme="danger">制作你的专属贴纸</t-button>
+    <t-button class="jump-button" theme="danger" bind:tap="jumpChooseClickHandle" wx:if="{{!isChooseImage}}">制作你的专属贴纸</t-button>
     <!-- <view class="styles-page-tabs">
       <t-tabs
         t-class="t-tabs"
@@ -33,7 +33,14 @@
           value="{{item.key}}" />
       </t-tabs>
     </view> -->
+    <choose-creation-list
+      wx:if="{{isChooseImage}}"
+      wr-class="creation-list-container"
+      creationList="{{creationList}}"
+      chooseList="{{chooseList}}"
+      bind:click="creationChooseClickHandle" />
     <creation-list
+      wx:else
       wr-class="creation-list-container"
       creationList="{{creationList}}"
       galleryTab="{{galleryTab}}"
@@ -41,14 +48,21 @@
     <load-more list-is-empty="{{!templateList.length}}" status="{{templateListLoadStatus}}" bind:retry="onReTry" />
     <t-toast id="t-toast" />
   </view>
-  <view class="gallery-page-bottom" wx:if="{{notFinishedTaskList.length}}">
+  <view class="gallery-page-bottom" wx:if="{{isChooseImage}}">
     <view class="bottom-left">
-      <view>正在生成 TODO个</view>
-      <!-- <t-progress percentage="80" label="" /> -->
+      <view>已选{{chooseList.length}}/{{creationList.length}}</view>
     </view>
-    <t-button theme="danger" bind:tap="tasksJumpClickHandle">查看队列</t-button>
+    <t-button bind:tap="chooseCancelClickHandle">取消</t-button>
+    <t-button theme="danger" bind:tap="printClickHandle">打印</t-button>
   </view>
-  <view class="gallery-page-side" bind:tap="tasksJumpClickHandle" wx:else>
-    历史队列
-  </view>
+  <block wx:else>
+    <view class="gallery-page-bottom" wx:if="{{notFinishedTaskList.length}}">
+      <view class="bottom-left">
+        <view>正在生成: {{notFinishedTaskList.length}}个</view>
+        <!-- <t-progress percentage="80" label="" /> -->
+      </view>
+      <t-button theme="danger" bind:tap="tasksJumpClickHandle">查看队列</t-button>
+    </view>
+    <view class="gallery-page-side" bind:tap="tasksJumpClickHandle" wx:else> 历史队列 </view>
+  </block>
 </view>
