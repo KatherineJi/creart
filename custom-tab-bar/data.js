@@ -5,12 +5,12 @@ export default [
     url: 'pages/home/home',
   },
   {
-    icon: 'cart',
+    icon: 'image',
     text: '画廊',
     url: 'pages/gallery/index',
   },
   {
-    icon: 'person',
+    icon: 'user',
     text: '我的',
     url: 'pages/usercenter/index',
   },

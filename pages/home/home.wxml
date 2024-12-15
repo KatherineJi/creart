@@ -14,16 +14,29 @@
   </view>
   <view class="swiper-wrap">
     <t-swiper
-      wx:if="{{imgSrcs.length > 0}}"
+      wx:if="{{swiperImgs.length > 0}}"
+      current="{{0}}"
+      autoplay="{{true}}"
+      duration="{{'500'}}"
+      interval="{{5000}}"
+      navigation="{{ { type: 'dots' } }}"
+      imageProps="{{ { mode: 'scaleToFill' } }}"
+      height="{{'380rpx'}}"
+      list="{{swiperImgs}}"
+      bind:click="handleSwiperClick" />
+  </view>
+  <view class="second-swiper-wrap">
+    <t-swiper
+      wx:if="{{secondSwiperImgs.length > 0}}"
       current="{{current}}"
       autoplay="{{autoplay}}"
       duration="{{duration}}"
       interval="{{interval}}"
       navigation="{{navigation}}"
       imageProps="{{swiperImageProps}}"
-      height="{{'750rpx'}}"
-      list="{{imgSrcs}}"
-      bind:click="navToActivityDetail" />
+      height="{{'230rpx'}}"
+      list="{{secondSwiperImgs}}"
+      bind:click="handleSecondSwiperClick" />
   </view>
 </view>
 <view class="home-page-container">
@@ -45,17 +58,27 @@
       />
     </t-tabs>
   </view> -->
-
-  <template-list
-    wr-class="template-list-container"
-    templateList="{{templateList}}"
-    bind:click="templateListClickHandle" />
-
-  <product-list
-    wr-class="product-list-container"
-    productList="{{productList}}"
-    bind:click="productListClickHandle"
-    bind:addcart="productListAddCartHandle" />
+  <view class="list-wrapper">
+    <view class="title-line">
+      <view class="title">风格</view>
+      <view class="more-btn" bind:tap="goTemplateListClickHandle">更多风格 ></view>
+    </view>
+    <template-list
+      wr-class="template-list-container"
+      templateList="{{templateList}}"
+      bind:click="templateListClickHandle" />
+  </view>
+  <view class="list-wrapper">
+    <view class="title-line">
+      <view class="title">产品</view>
+      <view class="more-btn" bind:tap="goProductListClickHandle">更多产品 ></view>
+    </view>
+    <product-list
+      wr-class="product-list-container"
+      productList="{{productList}}"
+      bind:click="productListClickHandle"
+      bind:addcart="productListAddCartHandle" />
+  </view>
   <load-more list-is-empty="{{!productList.length}}" status="{{productListLoadStatus}}" bind:retry="onReTry" />
   <t-toast id="t-toast" />
 </view>

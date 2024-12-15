@@ -1,6 +1,6 @@
 import { fetchHome } from '../../services/home/home';
 import { fetchGoodsList } from '../../services/good/fetchGoods';
-// import { fetchProductList } from '../../services/product/fetchProductList';
+import { fetchProductList } from '../../services/product/fetchProductList';
 import { fetchTemplateList } from '../../services/workflow/fetchTemplateList';
 import Toast from 'tdesign-miniprogram/toast/index';
 
@@ -8,6 +8,7 @@ Page({
   data: {
     imgSrcs: [],
     swiperList: [],
+    secondSwiperList: [],
     tabList: [],
     templateList: [],
     templateListLoadStatus: 0,
@@ -26,9 +27,14 @@ Page({
     swiperImageProps: { mode: 'scaleToFill' },
   },
 
-  goodListPagination: {
+  templateListPagination: {
     index: 0,
-    num: 20,
+    num: 5,
+  },
+
+  productListPagination: {
+    index: 0,
+    num: 5,
   },
 
   privateData: {
@@ -44,9 +50,10 @@ Page({
   },
 
   onReachBottom() {
-    if (this.data.goodsListLoadStatus === 0) {
-      this.loadGoodsList();
-    }
+    // TODO 加载更多商品
+    // if (this.data.goodsListLoadStatus === 0) {
+    //   this.loadGoodsList();
+    // }
   },
 
   onPullDownRefresh() {
@@ -63,15 +70,17 @@ Page({
     this.setData({
       pageLoading: true,
     });
-    fetchHome().then(({ swiper, tabList }) => {
+    fetchHome().then(({ swiper, secondSwiper, tabList }) => {
       this.setData({
         tabList,
         swiperList: swiper,
-        imgSrcs: swiper.map(item => item.img),
+        swiperImgs: swiper.map(item => item.img),
+        secondSwiperList: secondSwiper,
+        secondSwiperImgs: secondSwiper.map(item => item.img),
         pageLoading: false,
       });
       console.log(1)
-      // this.fetchProductList(true);
+      this.fetchProductList(true);
       this.loadTemplateList(true);
 
       console.log(2)
@@ -87,14 +96,14 @@ Page({
 
     this.setData({ productListLoadStatus: 1 });
 
-    // const pageSize = this.goodListPagination.num;
-    // let pageIndex = this.privateData.tabIndex * pageSize + this.goodListPagination.index + 1;
-    // if (fresh) {
-    //   pageIndex = 0;
-    // }
+    const pageSize = this.productListPagination.num;
+    let pageIndex = this.privateData.tabIndex * pageSize + this.productListPagination.index + 1;
+    if (fresh) {
+      pageIndex = 0;
+    }
 
     try {
-      const nextList = await fetchProductList();
+      const nextList = await fetchProductList(pageIndex, pageSize);
       this.setData({
         productList: fresh ? nextList : this.data.productList.concat(nextList),
         productListLoadStatus: 0,
@@ -117,8 +126,8 @@ Page({
 
     this.setData({ templateListLoadStatus: 1 });
 
-    const pageSize = this.goodListPagination.num;
-    let pageIndex = this.privateData.tabIndex * pageSize + this.goodListPagination.index + 1;
+    const pageSize = this.templateListPagination.num;
+    let pageIndex = this.privateData.tabIndex * pageSize + this.templateListPagination.index + 1;
     if (fresh) {
       pageIndex = 0;
     }
@@ -151,35 +160,6 @@ Page({
     this.loadGoodsList();
   },
 
-  async loadGoodsList(fresh = false) {
-    if (fresh) {
-      wx.pageScrollTo({
-        scrollTop: 0,
-      });
-    }
-
-    this.setData({ goodsListLoadStatus: 1 });
-
-    const pageSize = this.goodListPagination.num;
-    let pageIndex = this.privateData.tabIndex * pageSize + this.goodListPagination.index + 1;
-    if (fresh) {
-      pageIndex = 0;
-    }
-
-    try {
-      const nextList = await fetchGoodsList(pageIndex, pageSize);
-      this.setData({
-        goodsList: fresh ? nextList : this.data.goodsList.concat(nextList),
-        goodsListLoadStatus: 0,
-      });
-
-      this.goodListPagination.index = pageIndex;
-      this.goodListPagination.num = pageSize;
-    } catch (err) {
-      this.setData({ goodsListLoadStatus: 3 });
-    }
-  },
-
   productListClickHandle(e) {
     console.log('e', e);
     const { product } = e.detail;
@@ -201,7 +181,7 @@ Page({
     wx.navigateTo({ url: '/pages/product/search/index' });
   },
 
-  navToActivityDetail(e) {
+  handleSwiperClick(e) {
     const index = e.detail.index;
     const imgItem = this.data.swiperList[index];
 
@@ -210,5 +190,28 @@ Page({
         url: `/pages/workflow/generate/index?template_id=${imgItem.id}`,
       });
     }
+  },
+
+  handleSecondSwiperClick(e) {
+    const index = e.detail.index;
+    const imgItem = this.data.secondSwiperList[index];
+
+    if (imgItem.type === 'template') {
+      wx.navigateTo({
+        url: `/pages/workflow/generate/index?template_id=${imgItem.id}`,
+      });
+    }
+  },
+
+  goTemplateListClickHandle() {
+    wx.navigateTo({
+      url: '/pages/workflow/category/index',
+    });
+  },
+
+  goProductListClickHandle() {
+    wx.navigateTo({
+      url: '/pages/product/category/index',
+    });
   },
 });
