@@ -7,9 +7,9 @@
 	<view class="product-card__main">
 		<view class="product-card__thumb" bind:tap="clickThumbHandle">
 			<t-image
-			  t-class="product-card__img"
+			  class="product-card__img"
 			  src="{{ product.preview_imgs[0] }}"
-			  mode="aspectFill"
+			  mode="aspectFit"
 			  lazy-load
 			/>
 		</view>

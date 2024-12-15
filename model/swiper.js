@@ -25,19 +25,28 @@
 //   },
 // ];
 
-const images = [
+export const swiperImageList = [
   {
-    img: 'https://6372-creart-test-1g2yuv6d82b517bf-1257609973.tcb.qcloud.la/muxia-template-banner.png?sign=d21d013dece7211d422268b42fedeb9e&t=1730365552',
+    img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner3.png',
     type: 'template',
     id: '67286c6f94775434b44ac4a3',
   },
   {
-    img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/muxia-template-banner.png',
-    type: 'template',
-    id: '67286c6f94775434b44ac4a3',
+    img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner2.png',
+    type: 'desc',
+    id: '',
+  },
+  {
+    img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner.png',
+    type: 'desc',
+    id: '',
   }
 ];
 
-export function genSwiperImageList() {
-  return images;
-}
+export const secondSwiperImageList = [
+  {
+    img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner3.png',
+    type: 'template',
+    id: '67286c6f94775434b44ac4a3',
+  },
+];

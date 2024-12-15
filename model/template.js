@@ -5,131 +5,47 @@ const imgPrefix = cdnBase;
 const allTemplates = [
   {
     _id: "tid_001",
-    // id: "tid_001",
     name: "写实照片风",
     description: "这是写实照片风的描述",
-    preview_imgs: [],
+    // preview_imgs: [],
     tags: [
       "REALISM",
       "PHOTO"
     ],
-    render: '',
-    allow_products: [],
-    workflow: {
-      params: {
-        image: {
-          default: '',
-          position_node_id: '',
-          description: '基于图片',
-          type: 'image',
-          required: true,
-          position_input_name: '上传图片',
-        },
-        negative: {
-          default: '',
-          position_node_id: '',
-          description: '反向关键词',
-          type: 'string',
-          required: true,
-          position_input_name: '我不要',
-        },
-        positive: {
-          default: '',
-          position_node_id: '',
-          description: '正向关键词',
-          type: 'string',
-          required: true,
-          position_input_name: '我需要',
-        },
-        hair_color: {
-          index: 0,
-          name: '发色',
-          type: 'select',
-          default: '浅金色',
-          description: '发色',
-          required: true,
-          position_node_id: '134',
-          position_input_name: 'text b',
-          options: [
-            { "key": "浅粉色", "value": "(pastel pink hair1.2)" },
-            { "key": "浅金色", "value": "pastel golden hair" },
-            { "key": "浅蓝色", "value": "pastel blue hair" },
-            { "key": "浅紫色", "value": "pastel purple hair" }
-          ]
-          // {
-          //   "浅粉色": "(pastel pink hair1.2)",
-          //   "浅金色": "pastel golden hair",
-          //   "浅蓝色": "pastel blue hair",
-          //   "浅紫色": "pastel purple hair",
-          // },
-        },
-        hand_style: {
-          index: 0,
-          name: '手部姿势',
-          type: 'select',
-          default: '比心',
-          description: '手部姿势',
-          required: true,
-          position_node_id: '134',
-          position_input_name: 'text b',
-          options: [
-            { key: "比心", value: "bixin" },
-            { key: "比耶", value: "biye" },
-            { key: "托腮", value: "tuosai" },
-          ],
-        },
+    allow_products: ["贴纸"],
+    param_list: [
+      {
+        default: "ComfyUI_00343_.png",
+        description: "单人头像或半身像，不可多人",
+        key: "avatar",
+        name: "单人像",
+        options: [],
+        required: true,
+        type: "image",
       },
-      prompt: {},
-    }
-  },
-  {
-    _id: "tid_002",
-    name: "日式动漫风",
-    description: "这是日式动漫风的描述",
-    preview_imgs: [],
-    tags: [
-      "ANIMATION",
-      "JAPANESE"
+      {
+        default: "全侧面",
+        description: "身体面向角度",
+        key: "angle",
+        name: "角度",
+        options: [{ key: "全侧面", value: "profile:1.5" }, { key: "正面", value: "looking ahead" }],
+        required: true,
+        type: "select",
+      },
+      {
+        default: "浅金色",
+        description: "发色",
+        key: "hair_color",
+        name: "发色",
+        options: [{ key: "浅粉色", value: "with pastel pink hair" }, { key: "浅金色", value: "with pastel golden hair" }],
+        required: true,
+        type: "select",
+      }
     ],
-    allow_products: [],
-    workflow: null
-  },
-  {
-    _id: "tid_003",
-    name: "古风水墨画",
-    description: "这是古风水墨画的描述",
-    preview_imgs: [],
-    tags: [
-      "INK_PAINTING",
-      "ANCIENT_CHINESE"
+    preview_imgs: [
+      'https://creart-1300279601.cos.ap-shanghai.myqcloud.com/creation-templates/preview_imgs/ComfyUI_00741_.png'
     ],
-    allow_products: [],
-    workflow: null
   },
-  {
-    _id: "tid_004",
-    name: "111画",
-    description: "这是111画的描述",
-    preview_imgs: [],
-    tags: [
-      "INK_PAINTING",
-      "ANCIENT_CHINESE"
-    ],
-    allow_products: [],
-    workflow: null
-  },
-  {
-    _id: "tid_005",
-    name: "222",
-    description: "这是222画的描述",
-    preview_imgs: [],
-    tags: [
-      "INK_PAINTING",
-      "ANCIENT_CHINESE"
-    ],
-    allow_products: [],
-    workflow: null
-  }
 ];
 
 /**

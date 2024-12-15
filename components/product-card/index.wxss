@@ -11,7 +11,7 @@
   line-height: 1;
   padding: 0;
   background: transparent;
-  width: 340rpx;
+  width: 346rpx;
   border-radius: 0 0 16rpx 16rpx;
   align-items: center;
   justify-content: center;
@@ -22,8 +22,8 @@
 .product-card__thumb {
   flex-shrink: 0;
   position: relative;
-  width: 340rpx;
-  height: 340rpx;
+  width: 344rpx;
+  height: 344rpx;
 }
 
 .product-card__thumb:empty {
@@ -37,12 +37,18 @@
   height: 100%;
   border-radius: 16rpx 16rpx 0 0;
   overflow: hidden;
+  background: rgb(221, 221, 221);
+}
+
+.product-card__img image {
+  width: 100%;
+  height: 100%;
 }
 
 .product-card__body {
   display: flex;
   box-sizing: border-box;
-  width: 340rpx;
+  width: 346rpx;
   flex: 1 1 auto;
   background: #fff;
   border-radius: 0 0 16rpx 16rpx;
