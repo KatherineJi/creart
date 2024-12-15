@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "分类",
+  "navigationBarTitleText": "产品列表",
   "usingComponents": {
     "product-category": "./components/product-category/index",
     "product-list": "/components/product-list/index",

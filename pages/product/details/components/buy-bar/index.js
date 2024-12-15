@@ -54,15 +54,15 @@ Component({
       });
     },
 
-    toPrint() {
-      const { isStock, spuId } = this.properties;
-      // if (!isStock) return;
-      // this.triggerEvent('toAddCart');
-      const path = `/pages/workflow/pic-styles/index?spuId=${spuId}`;
-      wx.navigateTo({
-        url: path,
-      });
-    },
+    // toPrint() {
+    //   const { isStock, spuId } = this.properties;
+    //   // if (!isStock) return;
+    //   // this.triggerEvent('toAddCart');
+    //   const path = `/pages/workflow/pic-styles/index?spuId=${spuId}`;
+    //   wx.navigateTo({
+    //     url: path,
+    //   });
+    // },
 
     toBuyNow(e) {
       const { isStock } = this.properties;

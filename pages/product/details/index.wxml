@@ -16,7 +16,7 @@
             wr-class="class-product-price"
             symbol-class="class-product-symbol"
             price="{{minSalePrice}}"
-            priceUnit="yuan"
+            priceUnit="fen"
             type="lighter"
           />
           <view class="product-price-up">起</view>
@@ -116,7 +116,7 @@
   <product-specs-popup
     id="productSpecsPopup"
     show="{{isSpuSelectPopupShow}}"
-    title="{{details.title || ''}}"
+    title="{{details.name || ''}}"
     src="{{specImg ? specImg : primaryImage}}"
     specList="{{details.specList || []}}"
     skuList="{{skuArray}}"
@@ -135,14 +135,14 @@
         <price
           wx:if="{{!isAllSelectedSku || (!promotionSubCode && isAllSelectedSku)}}"
           price="{{selectSkuSellsPrice ? selectSkuSellsPrice : minSalePrice }}"
-          priceUnit="yuan"
+          priceUnit="fen"
           wr-class="popup-sku__price-num"
           symbol-class="popup-sku__price-symbol"
         />
         <price
           wx:if="{{selectSkuSellsPrice === 0 && minSalePrice !== maxSalePrice && !isAllSelectedSku}}"
           price="{{maxSalePrice}}"
-          priceUnit="yuan"
+          priceUnit="fen"
           wr-class="popup-sku__price-del"
           type="delthrough"
         />

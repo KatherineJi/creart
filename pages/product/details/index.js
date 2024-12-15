@@ -22,6 +22,8 @@ const obj2Params = (obj = {}, encode = false) => {
   return result.join('&');
 };
 
+const app = getApp();
+
 Page({
   data: {
     spuId: '',
@@ -59,9 +61,9 @@ Page({
         iconName: 'home',
       },
       {
-        title: '购物车',
-        url: '/pages/cart/index',
-        iconName: 'cart',
+        title: '画廊',
+        url: '/pages/gallery/index',
+        iconName: 'image',
         showCartNum: true,
       },
     ],
@@ -106,7 +108,7 @@ Page({
     });
   },
 
-  // 点：立即打印
+  // 底部点：立即制作
   buyItNow() {
     const { specList } = this.data.details;
     this.showSkuSelectPopup(1);
@@ -128,6 +130,7 @@ Page({
     this.showSkuSelectPopup(2);
   },
 
+  // 底部跳转（首页, 画廊）
   toNav(e) {
     const { url } = e.detail;
     wx.switchTab({
@@ -286,10 +289,20 @@ Page({
       skuId: query.skuId,
     });
     urlQueryStr = urlQueryStr ? `?${urlQueryStr}` : '';
-    const path = `/pages/order/product-design/index${urlQueryStr}`;
-    wx.navigateTo({
-      url: path,
+    // const path = `/pages/order/product-design/index${urlQueryStr}`;
+    // const path = `/pages/order/order-confirm/index`;
+    app.globalData.fromProductOrderData = {
+      productRequestList: query,
+      skuId: query.skuId,
+      product: this.data.details,
+    };
+    wx.switchTab({
+      url: '/pages/gallery/index',
     });
+
+    // wx.navigateTo({
+    //   url: path,
+    // });
   },
 
   // 选了SKU之后点确认
@@ -333,7 +346,9 @@ Page({
   async getDetail(spuId) {
     Promise.all([fetchProduct(spuId), fetchSkus(spuId)]).then((res) => {
       console.log(res);
-      const [details, skus] = res;
+      // 
+      const [details,] = res;
+      const skus = details.skus;
 
       const skuArray = [];
 

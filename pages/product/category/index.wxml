@@ -15,7 +15,6 @@
         value="{{item.id}}" />
     </t-tabs>
   </view>
-  <view>{{defaultTabValue}}</view>
   <view class="product-category-page-container">
     <product-list
       wr-class="product-list-container"

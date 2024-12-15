@@ -3,6 +3,7 @@ import { fetchProductList } from '../../../services/product/fetchProductList';
 Page({
   data: {
     productList: [],
+    allProductList: [],
     tabList: [],
     productListLoadStatus: 0,
     currentTabValue: '',
@@ -22,9 +23,7 @@ Page({
     }
   },
 
-  onShow() {
-    this.getTabBar().init();
-  },
+  onShow() { },
 
   onChange() {
     wx.navigateTo({
@@ -47,12 +46,14 @@ Page({
 
     try {
       const nextList = await fetchProductList();
+      const allProductList = fresh ? nextList : this.data.productList.concat(nextList);
+      const productList = this.data.currentTabValue === 'ALL' ? allProductList : allProductList.filter((p) => p.product_type === this.data.currentTabValue);
+
       this.setData({
-        productList: fresh ? nextList : this.data.productList.concat(nextList),
+        productList: productList,
+        allProductList: allProductList,
         productListLoadStatus: 0,
       });
-      console.log('productList', this.data.productList);
-
     } catch (err) {
       this.setData({ productListLoadStatus: 3 });
     }
@@ -62,8 +63,14 @@ Page({
     const { value } = e.detail;
     this.setData({
       currentTabValue: value,
-    })
-    // this.loadGoodsList(true);
+    });
+
+    // 更新产品列表productList
+    const productList = value === 'ALL' ? this.data.allProductList : this.data.allProductList.filter((p) => p.product_type === value);
+
+    this.setData({
+      productList: productList,
+    });
   },
 
   productListClickHandle(e) {
