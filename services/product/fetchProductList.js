@@ -15,12 +15,12 @@ function mockFetchProductList(pageIndex = 1, pageSize = 20) {
 }
 
 /** 获取商品列表 */
-export function fetchProductList(pageIndex = 1, pageSize = 19) {
+export function fetchProductList(pageIndex = 1, pageSize = 5) {
   if (config.useMock) {
     return mockFetchProductList(pageIndex, pageSize);
   }
   return request({
-    url: `http://${config.host}/products`,
+    url: `https://${config.host}/ecc/products`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {

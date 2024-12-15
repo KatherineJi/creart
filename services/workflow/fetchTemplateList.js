@@ -2,7 +2,7 @@ import { config } from '../../config/index';
 import request from '../_utils/request';
 
 /** 获取模板列表 */
-function mockFetchTemplateList(pageIndex = 1, pageSize = 20) {
+function mockFetchTemplateList(pageIndex = 1, pageSize = 5) {
   const { delay } = require('../_utils/delay');
   const { getTemplateList } = require('../../model/templates');
   return delay().then(() =>
@@ -15,13 +15,13 @@ function mockFetchTemplateList(pageIndex = 1, pageSize = 20) {
 }
 
 /** 获取模板列表 */
-export function fetchTemplateList(pageIndex = 1, pageSize = 20) {
+export function fetchTemplateList(pageIndex = 1, pageSize = 5) {
   if (config.useMock) {
     return mockFetchTemplateList(pageIndex, pageSize);
   }
 
   return request({
-    url: `http://${config.host}/design/templates/`,
+    url: `https://${config.host}/design/templates/`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {

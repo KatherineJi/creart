@@ -4,7 +4,7 @@ export function login({ code }) {
   // 封装 request 里会从storage中取token，所以这里不需要手动取
   // 默认在小程序启动时会调用handleWechatLogin，所以不需要手动调用login
   wx.request({
-    url: `http://${config.host}/users/wechat-login`,
+    url: `https://${config.host}/users/wechat-login`,
     method: 'POST',
     data: { code },
     success: (response) => {

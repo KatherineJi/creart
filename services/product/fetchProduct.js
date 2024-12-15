@@ -15,7 +15,7 @@ export function fetchProduct(pid = 0) {
   }
 
   return request({
-    url: `http://${config.host}/products/${pid}`,
+    url: `https://${config.host}/ecc/products/${pid}`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {

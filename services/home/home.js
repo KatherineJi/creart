@@ -3,10 +3,11 @@ import { config, cdnBase } from '../../config/index';
 /** 获取首页数据 */
 function mockFetchHome() {
   const { delay } = require('../_utils/delay');
-  const { genSwiperImageList } = require('../../model/swiper');
-  return delay().then(() => {
+  const { swiperImageList, secondSwiperImageList } = require('../../model/swiper');
+  return delay(0).then(() => {
     return {
-      swiper: genSwiperImageList(),
+      swiper: swiperImageList,
+      secondSwiper: secondSwiperImageList,
       tabList: [
         {
           text: '2D',

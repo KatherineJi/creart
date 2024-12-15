@@ -21,7 +21,7 @@ export function fetchTaskList(pageIndex = 1, pageSize = 20) {
   }
 
   return request({
-    url: `http://${config.host}/users/tasks/`,
+    url: `https://${config.host}/users/tasks`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {

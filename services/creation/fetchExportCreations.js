@@ -19,7 +19,7 @@ export function fetchExportCreations(params) {
   }
 
   return request({
-    url: `http://${config.host}/users/creations/export`,
+    url: `https://${config.host}/users/creations/export`,
     method: 'POST',
     data: params,
     success: (resolve, res) => {

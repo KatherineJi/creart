@@ -20,7 +20,7 @@ export function fetchNotFinishedTaskList(pageIndex = 1, pageSize = 20) {
   }
 
   return request({
-    url: `http://${config.host}/users/tasks/not-finished`,
+    url: `https://${config.host}/users/tasks/not-finished`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {

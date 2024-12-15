@@ -21,7 +21,7 @@ export function fetchSkus(pid = 0) {
   }
 
   return request({
-    url: `http://${config.host}/products/${pid}/skus`,
+    url: `https://${config.host}/ecc/products/${pid}/skus`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {

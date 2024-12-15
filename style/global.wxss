@@ -162,12 +162,13 @@
   @z-index-tooltip:@z-index-component + 70;
   */
 page {
-  height: 100%;
+  min-height: 100%;
   font-family: 'Microsoft YaHei', '微软雅黑', 'MicrosoftJhengHei', '华文细黑', Helvetica, Arial, 'sans-serif';
   font-size: 26rpx;
-  background-color: #f8f8f8;
+  background-color: #f5f5f5;
   font-weight: 400;
 }
+
 view,
 image,
 icon,

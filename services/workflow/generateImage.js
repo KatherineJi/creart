@@ -19,7 +19,7 @@ export function generateImage({ template_id, params }) {
   }
 
   return request({
-    url: `http://${config.host}/render/generate/${template_id}`,
+    url: `https://${config.host}/render/generate/${template_id}`,
     method: 'POST',
     data: params,
     success: (resolve, res) => {

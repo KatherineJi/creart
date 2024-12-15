@@ -21,7 +21,7 @@ export function fetchCreationList(pageIndex = 1, pageSize = 20) {
   }
 
   return request({
-    url: `http://${config.host}/users/creations`,
+    url: `https://${config.host}/users/creations`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {

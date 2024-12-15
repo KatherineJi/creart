@@ -15,7 +15,7 @@ export function fetchTemplate(tid = 0) {
   }
 
   return request({
-    url: `http://${config.host}/design/templates/${tid}`,
+    url: `https://${config.host}/design/templates/${tid}`,
     method: 'GET',
     data: {},
     success: (resolve, res) => {
