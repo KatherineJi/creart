@@ -6,15 +6,19 @@
     "pages/order/product-design/index",
     "pages/order/choose-image/index",
     "pages/order/image-cropper/index",
+    "pages/order/order-confirm/index",
+    "pages/order/pay-result/index",
     "pages/gallery/index",
     "pages/gallery/preview/index",
     "pages/gallery/tasks/index",
     "pages/gallery/task-detail/index",
     "pages/gallery/choose-gallery/index",
     "pages/gallery/print-preview/index",
+    "pages/workflow/category/index",
     "pages/workflow/pic-styles/index",
     "pages/workflow/generate/index",
-    "pages/usercenter/index"
+    "pages/usercenter/index",
+    "pages/usercenter/address/list/index"
   ],
   "tabBar": {
     "custom": true,

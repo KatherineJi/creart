@@ -16,6 +16,9 @@ App({
     galleryTab: 0,
     previewCreation: {},
     previewTask: {},
+    previewPrintCreations: [],
     previewPrintUrl: '',
+    previewPrintProduct: {},
+    fromProductOrderData: null,
   },
 });
