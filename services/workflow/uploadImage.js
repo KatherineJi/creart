@@ -18,7 +18,7 @@ export function uploadImage(file = {}) {
   }
 
   return uploadRequest({
-    url: `http://${config.host}/users/file`,
+    url: `https://${config.host}/users/file`,
     fileName: file.name,
     filePath: file.url,
     success: (resolve, res) => {
@@ -36,7 +36,7 @@ export function uploadImage(file = {}) {
   });
   return new Promise((resolve) => {
     wx.uploadFile({
-      url: `http://${config.host}/users/file`,
+      url: `https://${config.host}/users/file`,
       filePath: file.url,
       name: 'file',
       formData: {},
