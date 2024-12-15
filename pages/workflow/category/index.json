@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "风格列表",
+  "usingComponents": {
+    "template-list": "/components/template/template-list/index",
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
+  }
+}

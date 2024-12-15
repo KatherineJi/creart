@@ -1,0 +1,25 @@
+<view class="template-category-page">
+  <!-- <view class="template-category-page-tabs">
+    <t-tabs
+      t-class="t-tabs"
+      t-class-active="tabs-external__active"
+      t-class-item="tabs-external__item"
+      value="{{currentTabValue}}"
+      space-evenly="{{false}}"
+      bind:change="tabChangeHandle">
+      <t-tab-panel
+        wx:for="{{tabList}}"
+        wx:for-index="index"
+        wx:key="index"
+        label="{{item.name}}"
+        value="{{item.id}}" />
+    </t-tabs>
+  </view> -->
+  <view class="template-category-page-container">
+    <template-list
+      wr-class="template-list-container"
+      templateList="{{templateList}}"
+      bind:click="templateListClickHandle"
+      bind:addcart="templateListAddCartHandle" />
+  </view>
+</view>
