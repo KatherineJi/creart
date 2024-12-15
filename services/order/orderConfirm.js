@@ -36,9 +36,9 @@ function mockDispatchCommitPay() {
 
 /** 获取结算数据 */
 export function fetchSettleDetail(params) {
-  if (config.useMock) {
-    return mockFetchSettleDetail(params);
-  }
+  // if (config.useMock) {
+  return mockFetchSettleDetail(params);
+  // }
 
   return new Promise((resolve) => {
     resolve('real api');
@@ -47,9 +47,9 @@ export function fetchSettleDetail(params) {
 
 /* 提交订单 */
 export function dispatchCommitPay(params) {
-  if (config.useMock) {
-    return mockDispatchCommitPay(params);
-  }
+  // if (config.useMock) {
+  return mockDispatchCommitPay(params);
+  // }
 
   return new Promise((resolve) => {
     resolve('real api');

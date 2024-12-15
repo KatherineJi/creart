@@ -86,13 +86,21 @@ Page({
     const fromProductOrderData = app.globalData.fromProductOrderData;
     this.setData({
       galleryTab: app.globalData.galleryTab,
+      popupVisible: false,
     });
     if (fromProductOrderData) {
       this.setData({
         isChooseImage: true,
         fromProductOrderData,
+        chooseList: [],
       });
       app.globalData.fromProductOrderData = null;
+    } else {
+      this.setData({
+        isChooseImage: false,
+        fromProductOrderData: null,
+        chooseList: [],
+      });
     }
     app.globalData.galleryTab = 0;
 
@@ -212,10 +220,15 @@ Page({
       ...e.detail.product,
       selectedSkuDetail: e.detail.productRequestList,
     };
+    this.setData({
+      chooseList: [],
+      isChooseImage: false,
+    });
 
     wx.navigateTo({
       url: '/pages/gallery/print-preview/index',
     });
+
 
     // fetchExportCreations(
     //   // { creation_ids: 

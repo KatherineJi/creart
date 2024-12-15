@@ -38,9 +38,9 @@ function mockFetchDeliveryAddressList(len = 0) {
 
 /** 获取收货地址列表 */
 export function fetchDeliveryAddressList(len = 10) {
-  if (config.useMock) {
-    return mockFetchDeliveryAddressList(len);
-  }
+  // if (config.useMock) {
+  return mockFetchDeliveryAddressList(len);
+  // }
 
   return new Promise((resolve) => {
     resolve('real api');

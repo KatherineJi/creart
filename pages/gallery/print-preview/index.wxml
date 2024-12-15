@@ -11,10 +11,10 @@
       interval="{{5000}}"
       navigation="{{ { type: 'dots' } }}"
       imageProps="{{ { mode: 'scaleToFill' } }}"
-      height="{{'800rpx'}}"
+      height="{{'600rpx'}}"
       list="{{imgs}}"
       bind:click="handleSwiperClick" />
-      <image wx:else style="width: 100%; height: 100%;" show-menu-by-longpress src="{{img}}"></image>
+      <image wx:else mode="aspectFit" style="width: 100%; height: 100%;" show-menu-by-longpress src="{{img}}"></image>
     </view>
     <view class="details-wrapper">
       <product-specs-wrapper

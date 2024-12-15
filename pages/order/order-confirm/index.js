@@ -1,5 +1,6 @@
 import Toast from 'tdesign-miniprogram/toast/index';
 import { fetchSettleDetail } from '../../../services/order/orderConfirm';
+import { fetchOrderSubmit } from '../../../services/order/orderSubmit';
 // import { commitPay, wechatPayOrder } from './pay';
 import { getAddressPromise } from '../../usercenter/address/list/util';
 
@@ -489,6 +490,8 @@ Page({
       invoiceData,
       storeInfoList,
       submitCouponList,
+      orderDetail,
+      submitData,
     } = this.data;
     const { goodsRequestList } = this;
 
@@ -503,6 +506,19 @@ Page({
 
       return;
     }
+
+    fetchOrderSubmit({
+      ...submitData,
+      message: '',
+      "receiver_info": {
+        "address": settleDetailData.userAddress.address, // "安徽省安宁市大观区",
+        "name": settleDetailData.userAddress.name, // "受给验",
+        "phone": settleDetailData.userAddress.phone, // "15383889052"
+      }
+    }).then((res) => {
+      // paySuccess(payOrderInfo);
+    });
+
     if (
       this.payLock ||
       !settleDetailData.settleType ||
@@ -529,9 +545,9 @@ Page({
         this.payLock = false;
         const { data } = res;
         // 提交出现 失效 不在配送范围 限购的商品 提示弹窗
-        if (this.isInvalidOrder(data)) {
-          return;
-        }
+        // if (this.isInvalidOrder(data)) {
+        //   return;
+        // }
         if (res.code === 'Success') {
           this.handlePay(data, settleDetailData);
         } else {
@@ -610,7 +626,7 @@ Page({
       payInfo: payInfo,
       orderId: tradeNo,
       orderAmt: totalAmount,
-      payAmt: orderDetail.productRequestList.price, // totalPayAmount,
+      payAmt: this.data.orderDetail.productRequestList.price, // totalPayAmount,
       interactId: interactId,
       tradeNo: tradeNo,
       transactionId: transactionId,

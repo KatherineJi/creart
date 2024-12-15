@@ -11,8 +11,8 @@
 .image-wrapper {
   width: 600rpx;
   height: 600rpx;
-  padding: 24rpx 0;
-  margin: 0 auto;
+  /* padding: 24rpx 0; */
+  margin: 24rpx auto;
 }
 
 .image-wrapper image {
