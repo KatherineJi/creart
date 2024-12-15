@@ -27,11 +27,6 @@
 
 export const swiperImageList = [
   {
-    img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner3.png',
-    type: 'template',
-    id: '67286c6f94775434b44ac4a3',
-  },
-  {
     img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner2.png',
     type: 'desc',
     id: '',
@@ -40,12 +35,17 @@ export const swiperImageList = [
     img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner.png',
     type: 'desc',
     id: '',
-  }
+  },
+  // {
+  //   img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner3.png',
+  //   type: 'template',
+  //   id: '67286c6f94775434b44ac4a3',
+  // },
 ];
 
 export const secondSwiperImageList = [
   {
-    img: 'cloud://creart-test-1g2yuv6d82b517bf.6372-creart-test-1g2yuv6d82b517bf-1257609973/banner3.png',
+    img: 'https://creart-1300279601.cos.ap-shanghai.myqcloud.com/banner/banner1.png',
     type: 'template',
     id: '67286c6f94775434b44ac4a3',
   },
