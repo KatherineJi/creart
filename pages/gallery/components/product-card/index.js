@@ -27,13 +27,9 @@ Component({
           isValidityLinePrice = false;
         }
         const tags = [];
-        data.param_list.forEach(item => {
-          if (item.type != 'image') {
-            tags.push(item.value);
-          }
-        });
+
         this.setData({
-          task: {
+          product: {
             ...data,
             // img: data.preview_img?.[0], 
             img: `http://${config.host}${data.preview_img}`,
@@ -64,7 +60,7 @@ Component({
 
   data: {
     independentID: '',
-    task: { id: '' },
+    product: { id: '' },
     isValidityLinePrice: false,
     statusMap: {
       0: '队列中',
@@ -86,11 +82,11 @@ Component({
 
   methods: {
     clickHandle() {
-      this.triggerEvent('click', { task: this.data.task });
+      this.triggerEvent('click', { product: this.data.product });
     },
 
     clickThumbHandle() {
-      this.triggerEvent('thumb', { task: this.data.task });
+      this.triggerEvent('thumb', { product: this.data.product });
     },
 
     addCartHandle(e) {
@@ -100,7 +96,7 @@ Component({
         ...e.detail,
         id,
         cardID,
-        task: this.data.task,
+        product: this.data.product,
       });
     },
 
@@ -109,7 +105,7 @@ Component({
       if (id) {
         independentID = id;
       } else {
-        independentID = `task-card-${~~(Math.random() * 10 ** 8)}`;
+        independentID = `product-card-${~~(Math.random() * 10 ** 8)}`;
       }
       this.setData({ independentID });
     },
@@ -146,7 +142,7 @@ Component({
 
     intersectionObserverCB() {
       this.triggerEvent('ob', {
-        task: this.data.task,
+        product: this.data.product,
         context: this.intersectionObserverContext,
       });
     },

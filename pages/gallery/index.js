@@ -1,6 +1,8 @@
+import { config } from '../../config/index';
 import { fetchNotFinishedTaskList } from '../../services/task/fetchNotFinishedTaskList';
 import { fetchCreationList } from '../../services/creation/fetchCreationList';
 import { fetchExportCreations } from '../../services/creation/fetchExportCreations';
+import { fetchProductList } from '../../services/product/fetchProductList';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 const app = getApp();
@@ -15,6 +17,11 @@ Page({
     chooseList: [],
     isChooseImage: false,
     printLoading: false,
+    fromProductOrderData: null,
+
+    popupVisible: false,
+    productList: [],
+    productListLoading: false,
 
     imgSrcs: [],
     tabList: [
@@ -55,16 +62,14 @@ Page({
     this.getTabBar().init();
 
     this.init();
+
+    this.setData({
+      printLoading: false,
+    })
   },
 
   onLoad() {
-    this.setData({
-      galleryTab: app.globalData.galleryTab
-    });
-
     this.init();
-
-    app.globalData.galleryTab = 0;
   },
 
   onReachBottom() {
@@ -78,6 +83,19 @@ Page({
   },
 
   init() {
+    const fromProductOrderData = app.globalData.fromProductOrderData;
+    this.setData({
+      galleryTab: app.globalData.galleryTab,
+    });
+    if (fromProductOrderData) {
+      this.setData({
+        isChooseImage: true,
+        fromProductOrderData,
+      });
+      app.globalData.fromProductOrderData = null;
+    }
+    app.globalData.galleryTab = 0;
+
     this.loadPage();
   },
 
@@ -152,28 +170,62 @@ Page({
   },
 
   printClickHandle(e) {
-    this.setData({
-      printLoading: true,
-    });
-
-    fetchExportCreations(
-      // { creation_ids: 
-      this.data.chooseList.map((i) => this.data.creationList[i]._id),
-      // }
-    ).then((data) => {
-      console.log(data);
-
-      app.globalData.previewPrintUrl = data.url;
-      wx.navigateTo({
-        url: '/pages/gallery/print-preview/index',
+    // 从产品页过来不需要选产品
+    if (this.data.fromProductOrderData) {
+      this.productListClickHandle({ detail: this.data.fromProductOrderData });
+    } else {
+      this.setData({
+        // printLoading: true,
+        popupVisible: true,
+        productListLoading: true,
       });
-    });
+
+      fetchProductList().then((list) => {
+        this.setData({
+          productList: list,
+          productListLoading: false,
+        });
+      });
+    }
   },
 
   chooseCancelClickHandle() {
     this.setData({
       isChooseImage: false,
     });
+  },
+
+  onPopupVisibleChange(e) {
+    this.setData({
+      popupVisible: e.detail.visible,
+    });
+  },
+
+  productListClickHandle(e) {
+    console.log(e);
+    // e.detail.product._id
+
+    const previewPrintUrl = this.data.chooseList.map((i) => `http://${config.host}/output/1/${this.data.creationList[i].file_name}`);
+    app.globalData.previewPrintCreations = this.data.chooseList.map((i) => this.data.creationList[i]);
+    app.globalData.previewPrintUrl = previewPrintUrl;
+    app.globalData.previewPrintProduct = e.detail.product;
+
+    wx.navigateTo({
+      url: '/pages/gallery/print-preview/index',
+    });
+
+    // fetchExportCreations(
+    //   // { creation_ids: 
+    //   this.data.chooseList.map((i) => this.data.creationList[i]._id),
+    //   // }
+    // ).then((data) => {
+    //   console.log(data);
+
+    //   app.globalData.previewPrintUrl = data.url;
+    //   wx.navigateTo({
+    //     url: '/pages/gallery/print-preview/index',
+    //   });
+    // });
   }
 
 });

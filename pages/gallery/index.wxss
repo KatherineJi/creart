@@ -55,3 +55,17 @@
   padding: 24rpx 12rpx;
   border-radius: 24rpx 0 0 24rpx;
 }
+
+.product-list-popup {
+  color: var(--td-text-color-secondary);
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  width: 100vw;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.popup-title {
+  padding: 32rpx
+}
