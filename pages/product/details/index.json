@@ -13,6 +13,7 @@
     "price": "/components/price/index",
     "buy-bar": "./components/buy-bar/index",
     "promotion-popup": "./components/promotion-popup/index",
-    "product-specs-popup": "./components/product-specs-popup/index"
+    "product-specs-popup": "./components/product-specs-popup/index",
+    "product-specs-wrapper": "./components/product-specs-wrapper/index"
   }
 }

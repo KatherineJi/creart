@@ -57,7 +57,7 @@ const allProducts = [
         is_saleable: true,
         modified_at: "2024-12-09T20:11:04.285000",
         modified_by: "20241125Wz2Ukv",
-        price: 150,
+        price: 200,
         sku_id: "1-1733772448994",
         sku_name: "异形半切贴纸-8*8cm",
         spu_id: "1",

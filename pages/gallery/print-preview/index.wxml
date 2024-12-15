@@ -1,48 +1,50 @@
 <wxs src="/utils/num.wxs" module="toolNum" />
 <view class="gallery-print-preview">
-  <view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
-    <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
-  </view>
-  <view class="gallery-print-preview-container" wx:else>
+  <view class="gallery-print-preview-container">
     <!-- {{galleryTab}} -->
     <view class="image-wrapper">
-      <!-- <t-image style="width: 100%; height: 100%;" show-menu-by-longpress src="{{creation.img}}"></t-image> -->
-      <image style="width: 100%; height: 100%;" show-menu-by-longpress src="{{img}}"></image>
+      <t-swiper
+      wx:if="{{imgs.length > 0}}"
+      current="{{0}}"
+      autoplay="{{true}}"
+      duration="{{'500'}}"
+      interval="{{5000}}"
+      navigation="{{ { type: 'dots' } }}"
+      imageProps="{{ { mode: 'scaleToFill' } }}"
+      height="{{'800rpx'}}"
+      list="{{imgs}}"
+      bind:click="handleSwiperClick" />
+      <image wx:else style="width: 100%; height: 100%;" show-menu-by-longpress src="{{img}}"></image>
     </view>
     <view class="details-wrapper">
-      <view class="details-left">
-        <view class="detail-item">
-          <view class="form-item-title">大小：</view>
+      <product-specs-wrapper
+      id="productSpecsPopup"
+      product="{{product}}"
+      skuList="{{product.skuArray}}"
+      fromPreview
+      selectedSkuDetail="{{selectedSkuDetail}}"
+      bind:updateSelectedAttrStr="updateSelectedAttrStr"
+      bind:specsConfirm="specsConfirm"
+      isStock="{{true}}"
+      outOperateStatus="{{false}}"/>
+      <!-- bind:closeSpecsPopup="handlePopupHide" -->
+  
+      <!-- <view class="details-left">
+        <view wx:for="{{ product.attributes }}" wx:key="attr" wx:for-item="attr" class="detail-item">
+          <view class="form-item-title">{{attr.name}}：</view>
           <view>
-            <t-tag class="style" variant="light" theme="primary" shape="round">A4</t-tag>
+            <t-tag wx:for="{{ attr.values }}" wx:key="attrValue" wx:for-item="attrValue" class="style" variant="light" theme="primary" shape="round">{{attrValue}}</t-tag>
           </view>
         </view>
         <view class="detail-item">
-          <view class="form-item-title">张数：</view>
+          <view class="form-item-title">数量：</view>
           <view>
             <t-stepper defaultValue="1" theme="filled" />
           </view>
         </view>
-        <view class="detail-item">
-          <view class="form-item-title">覆膜：</view>
-          <view>
-            <t-tag class="params"
-              variant="light"
-              theme="{{themeList[toolNum.rdiv(index, 4)]}}"
-              shape="round">光膜</t-tag>
-            <t-tag class="params"
-              variant="light"
-              theme="{{themeList[toolNum.rdiv(index, 4)]}}"
-              shape="round">哑膜</t-tag>
-          </view>
-        </view>
-      </view>
-      <view class="details-right">
-        <t-icon name="file-copy" size="150rpx"></t-icon>
-        <view>纸张大小 A4</view>
-      </view>
+      </view> -->
     </view>
-    <view class="order-wrapper">
+    <view class="order-wrapper" wx:if="{{false}}">
       <view class="price-wrapper">
         <view>合计：</view>
         <view class="price-fore">￥</view>

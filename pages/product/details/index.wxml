@@ -7,8 +7,7 @@
       duration="{{duration}}"
       interval="{{interval}}"
       navigation="{{navigation}}"
-      list="{{details.preview_imgs}}"
-    ></t-swiper>
+      list="{{details.preview_imgs}}"></t-swiper>
     <view class="product-info">
       <view class="product-number">
         <view class="product-price">
@@ -17,8 +16,7 @@
             symbol-class="class-product-symbol"
             price="{{minSalePrice}}"
             priceUnit="fen"
-            type="lighter"
-          />
+            type="lighter" />
           <view class="product-price-up">起</view>
           <!-- <price wr-class="class-product-del" price="{{maxLinePrice}}" type="delthrough" /> -->
         </view>
@@ -52,7 +50,7 @@
       <view class="label">已选</view>
       <view class="content">
         <view class="{{!selectedAttrStr ? 'tintColor' : ''}}">
-          {{selectedAttrStr ? buyNum : ''}}{{selectedAttrStr || '请选择'}}
+          {{selectedAttrStr || '请选择'}}
         </view>
         <t-icon name="chevron-right" size="40rpx" color="#BBBBBB" />
       </view>
@@ -78,8 +76,7 @@
               count="{{5}}"
               size="12"
               gap="2"
-              color="{{['#ffc51c', '#ddd']}}"
-            />
+              color="{{['#ffc51c', '#ddd']}}" />
           </view>
         </view>
         <view class="comment-item-content"> {{commentItem.commentContent}} </view>
@@ -95,9 +92,7 @@
     <view wx:if="{{details.desc_imgs.length > 0}}" wx:for="{{details.desc_imgs}}" wx:key="index">
       <t-image t-class="desc-content__img" src="{{item}}" mode="widthFix" />
     </view>
-    <view class="desc-content__empty" wx:if="{{!details.desc_imgs || details.desc_imgs.length <= 0}}">
-      待完善
-    </view>
+    <view class="desc-content__empty" wx:if="{{!details.desc_imgs || details.desc_imgs.length <= 0}}"> 待完善 </view>
   </view>
   <view class="product-bottom-operation">
     <buy-bar
@@ -110,50 +105,24 @@
       bind:toAddCart="toAddCart"
       bind:toNav="toNav"
       bind:toBuyNow="buyItNow"
-      class="product-details-card"
-    />
+      class="product-details-card" />
   </view>
-  <product-specs-popup
-    id="productSpecsPopup"
-    show="{{isSpuSelectPopupShow}}"
-    title="{{details.name || ''}}"
-    src="{{specImg ? specImg : primaryImage}}"
-    specList="{{details.specList || []}}"
-    skuList="{{skuArray}}"
-    limitBuyInfo="{{details.limitInfo[0].text || ''}}"
-    bind:closeSpecsPopup="handlePopupHide"
-    bind:change="chooseSpecItem"
-    bind:changeNum="changeNum"
-    bind:addCart="addCart"
-    bind:buyNow="gotoBuy"
-    bind:specsConfirm="specsConfirm"
-    isStock="{{isStock}}"
-    outOperateStatus="{{outOperateStatus}}"
-  >
-    <view slot="product-price">
-      <view class="popup-sku__price">
-        <price
-          wx:if="{{!isAllSelectedSku || (!promotionSubCode && isAllSelectedSku)}}"
-          price="{{selectSkuSellsPrice ? selectSkuSellsPrice : minSalePrice }}"
-          priceUnit="fen"
-          wr-class="popup-sku__price-num"
-          symbol-class="popup-sku__price-symbol"
-        />
-        <price
-          wx:if="{{selectSkuSellsPrice === 0 && minSalePrice !== maxSalePrice && !isAllSelectedSku}}"
-          price="{{maxSalePrice}}"
-          priceUnit="fen"
-          wr-class="popup-sku__price-del"
-          type="delthrough"
-        />
-      </view>
-    </view>
-  </product-specs-popup>
+  <t-popup visible="{{isSpuSelectPopupShow}}" placement="bottom" bind:visible-change="handlePopupHide">
+    <product-specs-wrapper
+      id="productSpecsPopup"
+      product="{{details}}"
+      skuList="{{skuArray}}"
+      bind:updateSelectedAttrStr="updateSelectedAttrStr"
+      bind:closeSpecsPopup="handlePopupHide"
+      bind:specsConfirm="specsConfirm"
+      isStock="{{true}}"
+      outOperateStatus="{{false}}">
+    </product-specs-wrapper>
+  </t-popup>
   <promotion-popup
     list="{{list}}"
     bind:closePromotionPopup="closePromotionPopup"
     show="{{isShowPromotionPop}}"
-    bind:promotionChange="promotionChange"
-  />
+    bind:promotionChange="promotionChange" />
 </view>
 <t-toast id="t-toast" />

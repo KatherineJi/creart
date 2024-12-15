@@ -11,10 +11,10 @@
     wx:for-index="storeIndex"
     wx:key="storeIndex"
   >
-    <view class="store-wrapper">
+    <!-- <view class="store-wrapper">
       <t-icon prefix="wr" size="40rpx" color="#333333" name="store" class="store-logo" />
       {{stores.storeName}}
-    </view>
+    </view> -->
     <view
       wx:if="{{orderCardList[storeIndex].goodsList.length > 0}}"
       wx:for="{{orderCardList[storeIndex].goodsList}}"
@@ -41,10 +41,10 @@
         fill
         decimalSmaller
         wr-class="pay-item__right font-bold"
-        price="{{settleDetailData.totalSalePrice || '0'}}"
+        price="{{orderDetail.productRequestList.price || settleDetailData.totalSalePrice || '0'}}"
       />
     </view>
-    <view class="pay-item">
+    <!-- <view class="pay-item">
       <text>运费</text>
       <view class="pay-item__right font-bold">
         <block wx:if="{{settleDetailData.totalDeliveryFee && settleDetailData.totalDeliveryFee != 0}}">
@@ -84,7 +84,7 @@
         <text>{{handleInvoice(invoiceData)}}</text>
         <t-icon name="chevron-right" size="32rpx" color="#BBBBBB" />
       </view>
-    </view>
+    </view> -->
     <view class="pay-item">
       <text>订单备注</text>
       <view class="pay-item__right" data-storenoteindex="{{0}}" catchtap="onNotes">
@@ -95,16 +95,16 @@
       </view>
     </view>
   </view>
-  <view class="amount-wrapper">
+  <!-- <view class="amount-wrapper">
     <view class="pay-amount">
       <text class="order-num">共{{settleDetailData.totalGoodsCount}}件</text>
       <text>小计</text>
       <price class="total-price" price="{{settleDetailData.totalPayAmount}}" fill="{{false}}" decimalSmaller />
     </view>
-  </view>
+  </view> -->
   <view class="wx-pay-cover">
     <view class="wx-pay">
-      <price decimalSmaller fill class="price" price="{{settleDetailData.totalPayAmount || '0'}}" />
+      <price decimalSmaller fill class="price" price="{{orderDetail.productRequestList.price || settleDetailData.totalPayAmount || '0'}}" />
       <view class="submit-btn {{ settleDetailData.settleType === 1 ? '':'btn-gray'}}" bindtap="submitOrder">
         提交订单
       </view>

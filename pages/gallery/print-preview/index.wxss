@@ -10,7 +10,7 @@
 
 .image-wrapper {
   width: 600rpx;
-  height: 800rpx;
+  height: 600rpx;
   padding: 24rpx 0;
   margin: 0 auto;
 }
@@ -23,8 +23,15 @@
   background: #fff;
   display: flex;
   justify-content: space-between;
-  padding: 80rpx;
+  /* padding: 80rpx; */
   
+}
+
+.details-wrapper .popup-container {
+  padding-bottom: 0;
+}
+.details-wrapper .popup-sku-body {
+  margin-bottom: 0;
 }
 
 .detail-item {

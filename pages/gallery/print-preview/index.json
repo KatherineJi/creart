@@ -15,6 +15,7 @@
     "t-tag": "tdesign-miniprogram/tag/tag",
     "t-stepper": "tdesign-miniprogram/stepper/stepper",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
-    "t-popup": "tdesign-miniprogram/popup/popup"
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "product-specs-wrapper": "../../product/details/components/product-specs-wrapper/index"
   }
 }

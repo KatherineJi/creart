@@ -195,7 +195,10 @@ Page({
     if (options.order) {
       const order = JSON.parse(options.order);
       this.setData({
-        orderDetail: order,
+        orderDetail: order.orderData,
+        submitData: {
+          products: order.products,
+        }
       });
     }
 
@@ -607,7 +610,7 @@ Page({
       payInfo: payInfo,
       orderId: tradeNo,
       orderAmt: totalAmount,
-      payAmt: totalPayAmount,
+      payAmt: orderDetail.productRequestList.price, // totalPayAmount,
       interactId: interactId,
       tradeNo: tradeNo,
       transactionId: transactionId,

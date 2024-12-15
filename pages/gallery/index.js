@@ -208,7 +208,10 @@ Page({
     const previewPrintUrl = this.data.chooseList.map((i) => `http://${config.host}/output/1/${this.data.creationList[i].file_name}`);
     app.globalData.previewPrintCreations = this.data.chooseList.map((i) => this.data.creationList[i]);
     app.globalData.previewPrintUrl = previewPrintUrl;
-    app.globalData.previewPrintProduct = e.detail.product;
+    app.globalData.previewPrintProduct = {
+      ...e.detail.product,
+      selectedSkuDetail: e.detail.productRequestList,
+    };
 
     wx.navigateTo({
       url: '/pages/gallery/print-preview/index',

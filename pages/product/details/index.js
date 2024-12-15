@@ -94,6 +94,7 @@ Page({
     soldNum: getRandomNum(10, 999), // TODO 已售数量
   },
 
+  // 关闭popup
   handlePopupHide() {
     this.setData({
       isSpuSelectPopupShow: false,
@@ -229,6 +230,12 @@ Page({
     return normalizedTree;
   },
 
+  updateSelectedAttrStr(e) {
+    this.setData({
+      selectedAttrStr: e.detail.selectedAttrStr,
+    });
+  },
+
   selectSpecsName(selectSpecsName) {
     if (selectSpecsName) {
       this.setData({
@@ -254,16 +261,16 @@ Page({
 
   gotoBuy(type) {
     const { isAllSelectedSku, buyNum } = this.data;
-    if (!isAllSelectedSku) {
-      Toast({
-        context: this,
-        selector: '#t-toast',
-        message: '请选择规格',
-        icon: '',
-        duration: 1000,
-      });
-      return;
-    }
+    // if (!isAllSelectedSku) {
+    //   Toast({
+    //     context: this,
+    //     selector: '#t-toast',
+    //     message: '请选择规格',
+    //     icon: '',
+    //     duration: 1000,
+    //   });
+    //   return;
+    // }
     this.handlePopupHide();
     const query = {
       quantity: buyNum,
@@ -271,7 +278,7 @@ Page({
       spuId: this.data.spuId,
       productName: this.data.details.title,
       skuId:
-        type === 1 ? this.data.skuList[0].skuId : this.data.selectItem.skuId,
+        type === 1 ? this.data.skuList[0].skuId : this.data.selectItem?.skuId,
       available: this.data.details.available,
       price: this.data.details.minSalePrice,
       specInfo: this.data.details.specList?.map((item) => ({
@@ -307,14 +314,17 @@ Page({
 
   // 选了SKU之后点确认
   specsConfirm() {
-    const { buyType } = this.data;
-    this.gotoBuy();
+    // const { buyType } = this.data;
+    // this.gotoBuy();
     // if (buyType === 1) {
     //   this.gotoBuy();
     // } else {
     //   this.addCart();
     // }
     // this.handlePopupHide();
+    wx.switchTab({
+      url: '/pages/gallery/index',
+    });
   },
 
   changeNum(e) {
@@ -409,7 +419,12 @@ Page({
       console.log('details', details);
 
       this.setData({
-        details: details,
+        details: {
+          ...details,
+          minSalePrice,
+          maxSalePrice,
+          skuArray,
+        },
         skuArray: skuArray,
         minSalePrice,
         maxSalePrice,
